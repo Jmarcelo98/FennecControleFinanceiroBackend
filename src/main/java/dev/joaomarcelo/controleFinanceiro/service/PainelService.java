@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import dev.joaomarcelo.controleFinanceiro.dto.PainelDTO;
 import dev.joaomarcelo.controleFinanceiro.dto.PainelDespesaDTO;
 import dev.joaomarcelo.controleFinanceiro.dto.PainelReceitaDTO;
 import dev.joaomarcelo.controleFinanceiro.dto.PainelValoresAnuaisESaldo;
@@ -42,46 +43,55 @@ public class PainelService {
 
 	}
 
-	public ResponseEntity<?> buscarReceitasMesDeAcordoComAno(Integer id, Integer ano) {
+	public ResponseEntity<?> painelValores(Integer id, Integer ano) {
 
-		List<String> a = receitaRepository.buscarValoresEMesDeAcordoComAno(id, ano);
+		PainelDTO pa = new PainelDTO(buscarDespesasMesDeAcordoComAno(id, ano), buscarReceitasMesDeAcordoComAno(id, ano),
+				painelValoresReceitaDespesaSaldo(id, ano));
 
-		List<PainelReceitaDTO> as = new ArrayList<>();
+		return ResponseEntity.ok(pa);
 
-		for (int i = 0; i < a.size(); i++) {
-
-			StringTokenizer st = new StringTokenizer(a.get(i));
-
-			String data = st.nextToken(",");
-			String valor = st.nextToken(",");
-
-			PainelReceitaDTO painel = new PainelReceitaDTO(Double.valueOf(valor), Integer.valueOf(data));
-			as.add(painel);
-		}
-		return ResponseEntity.ok(as);
 	}
 
-	public ResponseEntity<?> buscarDespesasMesDeAcordoComAno(Integer id, Integer ano) {
+	private List<PainelDespesaDTO> buscarDespesasMesDeAcordoComAno(Integer id, Integer ano) {
 
-		List<String> a = despesaRepository.buscarValoresEMesDeAcordoComAno(id, ano);
+		List<String> despesaListaAnos = despesaRepository.buscarValoresEMesDeAcordoComAno(id, ano);
 
-		List<PainelDespesaDTO> as = new ArrayList<>();
+		List<PainelDespesaDTO> despesaDTOListaAnos = new ArrayList<>();
 
-		for (int i = 0; i < a.size(); i++) {
+		for (int i = 0; i < despesaListaAnos.size(); i++) {
 
-			StringTokenizer st = new StringTokenizer(a.get(i));
+			StringTokenizer st = new StringTokenizer(despesaListaAnos.get(i));
 
 			String data = st.nextToken(",");
 			String valor = st.nextToken(",");
 
 			PainelDespesaDTO painel = new PainelDespesaDTO(Double.valueOf(valor), Integer.valueOf(data));
-			as.add(painel);
+			despesaDTOListaAnos.add(painel);
 		}
-		return ResponseEntity.ok(as);
+
+		return despesaDTOListaAnos;
 	}
 
-	public ResponseEntity<?> valoresAnualESaldo(Integer id, Integer ano) {
+	private List<PainelReceitaDTO> buscarReceitasMesDeAcordoComAno(Integer id, Integer ano) {
 
+		List<String> receitaListaAnos = receitaRepository.buscarValoresEMesDeAcordoComAno(id, ano);
+
+		List<PainelReceitaDTO> receitaDTOListaAnos = new ArrayList<>();
+
+		for (int i = 0; i < receitaListaAnos.size(); i++) {
+
+			StringTokenizer st = new StringTokenizer(receitaListaAnos.get(i));
+
+			String data = st.nextToken(",");
+			String valor = st.nextToken(",");
+
+			PainelReceitaDTO painel = new PainelReceitaDTO(Double.valueOf(valor), Integer.valueOf(data));
+			receitaDTOListaAnos.add(painel);
+		}
+		return receitaDTOListaAnos;
+	}
+
+	private PainelValoresAnuaisESaldo painelValoresReceitaDespesaSaldo(Integer id, Integer ano) {
 		Double receita = receitaRepository.valorReceitaAnual(ano, id);
 		Double despesa = despesaRepository.valorDespesaAnual(ano, id);
 
@@ -94,8 +104,8 @@ public class PainelService {
 		}
 
 		PainelValoresAnuaisESaldo painel = new PainelValoresAnuaisESaldo(receita, despesa, receita - despesa);
+		return painel;
 
-		return ResponseEntity.ok(painel);
 	}
 
 }

@@ -32,20 +32,10 @@ public class PainelController {
 
 		return ResponseEntity.ok().body(anosDasReceitasEDespesas);
 	}
-
-	@GetMapping(path = "receita/{ano}")
-	public ResponseEntity<?> buscarReceitasMesDeAcordoComAno(@PathVariable(value = "ano") Integer ano) {
-		return painelService.buscarReceitasMesDeAcordoComAno(idToken.pegarIdPeloToken(), ano);
-	}
-
-	@GetMapping(path = "despesa/{ano}")
-	public ResponseEntity<?> buscarDespesasMesDeAcordoComAno(@PathVariable(value = "ano") Integer ano) {
-		return painelService.buscarDespesasMesDeAcordoComAno(idToken.pegarIdPeloToken(), ano);
-	}
-
-	@GetMapping(path = "/valoresAnual/{ano}")
-	public ResponseEntity<?> valoresAnualESaldo(@PathVariable(value = "ano") Integer ano) {
-		return painelService.valoresAnualESaldo(idToken.pegarIdPeloToken(), ano);
+	
+	@GetMapping(path = "/painel/{ano}")
+	public ResponseEntity<?> teste(@PathVariable(value = "ano") Integer ano) {
+		return painelService.painelValores(idToken.pegarIdPeloToken(), ano);
 	}
 
 }

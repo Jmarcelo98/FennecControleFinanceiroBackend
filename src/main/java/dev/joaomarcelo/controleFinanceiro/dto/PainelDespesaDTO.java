@@ -11,7 +11,7 @@ public class PainelDespesaDTO {
 		this.dataDespesa = dataDespesa;
 
 	}
-
+	
 	public Double getValorTotalDespesa() {
 		return valorTotalDespesa;
 	}
