@@ -25,7 +25,7 @@ public class PainelController {
 	private JwtUtils idToken;
 
 	// PEGAR TODOS OS ANOS
-	@GetMapping
+	@GetMapping(path = "anos")
 	public ResponseEntity<List<String>> buscarTodasReceitasOuDespesasAcordoComOMesAno() {
 
 		List<String> anosDasReceitasEDespesas = painelService.anosASeremMostrados(idToken.pegarIdPeloToken());
@@ -33,7 +33,7 @@ public class PainelController {
 		return ResponseEntity.ok().body(anosDasReceitasEDespesas);
 	}
 	
-	@GetMapping(path = "/painel/{ano}")
+	@GetMapping(path = "/{ano}")
 	public ResponseEntity<?> teste(@PathVariable(value = "ano") Integer ano) {
 		return painelService.painelValores(idToken.pegarIdPeloToken(), ano);
 	}

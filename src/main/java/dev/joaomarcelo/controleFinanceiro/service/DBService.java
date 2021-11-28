@@ -51,6 +51,7 @@ public class DBService {
 	private Calendar cal18 = Calendar.getInstance();
 	private Calendar cal19 = Calendar.getInstance();
 	private Calendar cal20 = Calendar.getInstance();
+	private Calendar cal21 = Calendar.getInstance();
 
 	public void instaciarTesteBancoDeDados() {
 
@@ -78,6 +79,8 @@ public class DBService {
 		cal19.set(2021, 10, 1, 10, 32, 22);
 		cal20.set(2021, 11, 10, 0, 0, 1);
 
+		cal21.set(2020, 12, 10, 0, 0, 1);
+
 		// USUARIO
 		Usuario usuario1 = new Usuario("João", "Marcelo", "JOAOMARCELO588@GMAIL.COM", codificador.encode("123456"),
 				null);
@@ -99,9 +102,14 @@ public class DBService {
 		Despesa despesa7 = new Despesa(null, "Ram", 100.0, new Date(), usuario1);
 		Despesa despesa13 = new Despesa(null, "Monitor", 1600.0, cal11.getTime(), usuario1);
 		Despesa despesa14 = new Despesa(null, "Copo", 200.0, cal13.getTime(), usuario1);
-		Despesa despesa15 = new Despesa(null, "Fio do controle", 70.0, cal15.getTime(), usuario1);
-		Despesa despesa16 = new Despesa(null, "Cabo do monitor", 30.0, cal15.getTime(), usuario1);
-		Despesa despesa17 = new Despesa(null, "Memória Ram", 230.0, cal17.getTime(), usuario1);
+		Despesa despesa15 = new Despesa(null, "Fio do controle", 370.0, cal15.getTime(), usuario1);
+		Despesa despesa16 = new Despesa(null, "Cabo do monitor", 400.0, cal20.getTime(), usuario1);
+		Despesa despesa17 = new Despesa(null, "Memória Ram", 630.0, cal17.getTime(), usuario1);
+		Despesa despesa18 = new Despesa(null, "Cadeira gamer", 3800.0, cal21.getTime(), usuario1);
+		Despesa despesa19 = new Despesa(null, "Shows", 500.0, cal12.getTime(), usuario1);
+		Despesa despesa20 = new Despesa(null, "Bebidas", 1000.0, cal14.getTime(), usuario1);
+		Despesa despesa21 = new Despesa(null, "Comidas", 250.0, cal16.getTime(), usuario1);
+		Despesa despesa22 = new Despesa(null, "Presente", 1000.0, cal18.getTime(), usuario1);
 
 		Despesa despesa8 = new Despesa(null, "Processador", 1340.50, cal2.getTime(), usuario2);
 		Despesa despesa9 = new Despesa(null, "Cinema", 50.50, cal4.getTime(), usuario2);
@@ -109,9 +117,9 @@ public class DBService {
 		Despesa despesa11 = new Despesa(null, "Plano OI FIBRA", 100.0, cal7.getTime(), usuario2);
 		Despesa despesa12 = new Despesa(null, "Cadeira gamer", 800.0, cal8.getTime(), usuario2);
 
-		despesaRepository.saveAll(
-				Arrays.asList(despesa1, despesa2, despesa3, despesa4, despesa5, despesa6, despesa7, despesa8, despesa9,
-						despesa10, despesa11, despesa12, despesa13, despesa14, despesa16, despesa15, despesa17));
+		despesaRepository.saveAll(Arrays.asList(despesa1, despesa2, despesa3, despesa4, despesa5, despesa6, despesa7,
+				despesa8, despesa9, despesa10, despesa11, despesa12, despesa13, despesa14, despesa16, despesa15,
+				despesa17, despesa18, despesa19, despesa20, despesa21, despesa22));
 
 		// RECEITA
 
@@ -125,14 +133,16 @@ public class DBService {
 		Receita receita13 = new Receita(null, "Venda de monitor", 800.0, cal3.getTime(), usuario1);
 		Receita receita14 = new Receita(null, "Venda do Computador", 5800.0, cal10.getTime(), usuario1);
 		Receita receita15 = new Receita(null, "Venda na OLX", 350.0, cal11.getTime(), usuario1);
-		Receita receita16 = new Receita(null, "Freelancer", 3800.0, cal12.getTime(), usuario1);
+		Receita receita16 = new Receita(null, "Freelancer", 1800.0, cal12.getTime(), usuario1);
 		Receita receita17 = new Receita(null, "Bonificação", 800.0, cal13.getTime(), usuario1);
-		Receita receita18 = new Receita(null, "Décimo terceiro", 850.0, cal14.getTime(), usuario1);
-		Receita receita19 = new Receita(null, "Venda de cadeira", 500.0, cal15.getTime(), usuario1);
-		Receita receita20 = new Receita(null, "Venda de monitor secundário", 300.0, cal16.getTime(), usuario1);
-		Receita receita21 = new Receita(null, "Venda de controle", 40.0, cal18.getTime(), usuario1);
-		Receita receita22 = new Receita(null, "Cashback", 35.0, cal19.getTime(), usuario1);
-		Receita receita23 = new Receita(null, "Venda de Teclado", 210.0, cal20.getTime(), usuario1);
+		Receita receita18 = new Receita(null, "Décimo terceiro", 2850.0, cal14.getTime(), usuario1);
+		Receita receita19 = new Receita(null, "Venda de cadeira", 760.0, cal15.getTime(), usuario1);
+		Receita receita24 = new Receita(null, "Venda de teclado", 270.0, cal15.getTime(), usuario1);
+		Receita receita25 = new Receita(null, "Venda do copo Stanley", 200.0, cal15.getTime(), usuario1);
+		Receita receita20 = new Receita(null, "Venda de monitor secundário", 1300.0, cal16.getTime(), usuario1);
+		Receita receita21 = new Receita(null, "Venda de controle", 140.0, cal18.getTime(), usuario1);
+		Receita receita22 = new Receita(null, "Cashback", 325.0, cal19.getTime(), usuario1);
+		Receita receita23 = new Receita(null, "Venda de Teclado", 2310.0, cal20.getTime(), usuario1);
 
 		Receita receita7 = new Receita(null, "Salário", 6500.00, cal2.getTime(), usuario2);
 		Receita receita8 = new Receita(null, "Venda do alimentação", 650.0, cal4.getTime(), usuario2);
@@ -142,7 +152,7 @@ public class DBService {
 
 		receitaRepository.saveAll(Arrays.asList(receita1, receita2, receita3, receita4, receita5, receita6, receita7,
 				receita8, receita9, receita10, receita11, receita12, receita13, receita14, receita15, receita16,
-				receita17, receita18, receita19, receita20, receita21, receita22, receita23));
+				receita17, receita18, receita19, receita20, receita21, receita22, receita23 ,receita24, receita25));
 
 	}
 
