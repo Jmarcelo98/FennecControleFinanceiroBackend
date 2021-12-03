@@ -13,7 +13,7 @@ public abstract class AbstractEmailService implements EmailService {
 	private String sender;
 
 	@Override
-	public void enviarNovaSenhaEmail(Usuario usuario, String novaSenha) {
+	public void enviarCodigoSenha(Usuario usuario, String novaSenha) {
 		SimpleMailMessage sm = prepararNovaSenhaEmail(usuario, novaSenha);
 		enviarEmail(sm);
 
@@ -25,7 +25,7 @@ public abstract class AbstractEmailService implements EmailService {
 		sm.setFrom(sender);
 		sm.setSubject("Solicitação de nova senha!");
 		sm.setSentDate(new Date(System.currentTimeMillis()));
-		sm.setText("Olá " + usuario.getNome() + " " + usuario.getSobrenome() + "\n Sua senha provisória é: " + novaSenha);
+		sm.setText("Olá " + usuario.getNome() + " " + usuario.getSobrenome() + "\n Seu código para criar uma nova senha é: " + novaSenha);
 		return sm;
 	}
 

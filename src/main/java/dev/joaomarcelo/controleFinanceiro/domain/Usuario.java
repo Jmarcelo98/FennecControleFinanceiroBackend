@@ -40,7 +40,7 @@ public class Usuario implements Serializable {
 	@Min(6)
 	private String senha;
 
-	private String senhaProvisoria;
+	private String codigoRecuperacaoSenha;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
@@ -54,13 +54,13 @@ public class Usuario implements Serializable {
 
 	}
 
-	public Usuario(String nome, String sobrenome, @Email String email, String senha, String senhaProvisoria) {
+	public Usuario(String nome, String sobrenome, @Email String email, String senha, String codigoRecuperacaoSenha) {
 		super();
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.email = email;
 		this.senha = senha;
-		this.senhaProvisoria = senhaProvisoria;
+		this.codigoRecuperacaoSenha = codigoRecuperacaoSenha;
 	}
 
 	public Integer getId() {
@@ -119,12 +119,12 @@ public class Usuario implements Serializable {
 		this.receita = receita;
 	}
 
-	public String getSenhaProvisoria() {
-		return senhaProvisoria;
+	public String getCodigoRecuperacaoSenha() {
+		return codigoRecuperacaoSenha;
 	}
 
-	public void setSenhaProvisoria(String senhaProvisoria) {
-		this.senhaProvisoria = senhaProvisoria;
+	public void setCodigoRecuperacaoSenha(String senhaProvisoria) {
+		this.codigoRecuperacaoSenha = senhaProvisoria;
 	}
 
 	@Override

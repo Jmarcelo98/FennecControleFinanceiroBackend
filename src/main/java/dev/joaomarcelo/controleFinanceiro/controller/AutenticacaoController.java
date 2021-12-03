@@ -10,7 +10,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +28,7 @@ import dev.joaomarcelo.controleFinanceiro.repository.UsuarioRepository;
 import dev.joaomarcelo.controleFinanceiro.security.jwt.JwtUtils;
 import dev.joaomarcelo.controleFinanceiro.security.services.UserDetailsImpl;
 import dev.joaomarcelo.controleFinanceiro.service.AutenticacaoService;
+import dev.joaomarcelo.controleFinanceiro.service.UsuarioService;
 import dev.joaomarcelo.controleFinanceiro.util.FormatarPalavras;
 import dev.joaomarcelo.controleFinanceiro.util.MensagensPersonalizadas;
 
@@ -41,10 +45,10 @@ public class AutenticacaoController {
 
 	@Autowired
 	private AutenticacaoService autenticacaoService;
-
-//	@Autowired
-//	private JavaMailSender mailSender;
-
+	
+	@Autowired 
+	private UsuarioService usuarioService;
+	
 	@Autowired
 	private BCryptPasswordEncoder codificador;
 
@@ -57,19 +61,13 @@ public class AutenticacaoController {
 	@PostMapping(value = "login")
 	public ResponseEntity<?> loginUsuario(@RequestBody LoginRequest loginRequest) {
 
-		Boolean senhaProvisoria = false;
-
 		if (!usuarioRepository.existsByEmail(FormatarPalavras.caixaAlta(loginRequest.getEmail()))) {
 
 			return loginIncorreto;
 
 		} else {
 
-//			if (codificador.matches(loginRequest.getSenha(), usuarioRepository
-//					.existsBySenhaProvisoriaByUser(FormatarPalavras.caixaAlta(loginRequest.getEmail())))) {
-//				senhaProvisoria = true;
-//			} else 
-				if (!codificador.matches(loginRequest.getSenha(),
+			if (!codificador.matches(loginRequest.getSenha(),
 					usuarioRepository.existsBySenhaByUser(FormatarPalavras.caixaAlta(loginRequest.getEmail())))) {
 				return loginIncorreto;
 			}
@@ -84,13 +82,8 @@ public class AutenticacaoController {
 
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-//		if (senhaProvisoria == true) {
-//			return ResponseEntity
-//					.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getNome(), userDetails.getSobrenome(), true));
-//		};
-
-		return ResponseEntity
-				.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getNome(), userDetails.getSobrenome(), false));
+		return ResponseEntity.ok(
+				new JwtResponse(jwt, userDetails.getId(), userDetails.getNome(), userDetails.getSobrenome(), false));
 	}
 
 	@PostMapping(value = "cadastro")
@@ -111,12 +104,24 @@ public class AutenticacaoController {
 		return ResponseEntity.ok(new MessageResponse(MensagensPersonalizadas.USUARIO_CADASTRADO_COM_SUCESSO));
 	}
 
-	@PostMapping(value = "esqueciSenha")
+	@PostMapping(path = "recuperar-senha")
 	public ResponseEntity<?> esqueciASenha(@Valid @RequestBody EmailDTO emailDTO) {
-
-		return autenticacaoService.enviarNovaSenha(emailDTO.getEmail());
+		return autenticacaoService.enviarCodigo(emailDTO.getEmail());
 
 	}
+
+	@GetMapping(path = "{email}/{codigo}")
+	public ResponseEntity<?> verificarCodigo(@PathVariable(value = "email") String email,
+			@PathVariable(value = "codigo") String codigo) {
+
+		return autenticacaoService.verificarCodigo(email, codigo);
+	}
+	
+	@PutMapping(value = "atualizarSenha")
+	public ResponseEntity<?> atualizarSenha(@RequestBody @Valid LoginRequest loginRequest) {
+		return usuarioService.atualizarSenha(loginRequest.getEmail(), loginRequest.getSenha());
+	}
+
 
 //	@PostMapping(value = "/refresh_token")
 //	public ResponseEntity<Void> refreshToken(HttpServletResponse response) {

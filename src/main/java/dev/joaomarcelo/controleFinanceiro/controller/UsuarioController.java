@@ -11,7 +11,7 @@ import dev.joaomarcelo.controleFinanceiro.service.UsuarioService;
 @RestController
 @RequestMapping("usuario")
 public class UsuarioController {
-
+	
 	@Autowired
 	private UsuarioService usuarioService;
 

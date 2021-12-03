@@ -18,6 +18,11 @@ public class MensagensPersonalizadas {
 
 //	ESQUECI A SENHA
 	public static String EMAIL_NAO_ENCONTRADO = "Email não encontrado";
-	public static String ENVIADO_RECUPERAR_SENHA = "Senha provisória enviada com sucesso!";
+	public static String ENVIADO_CODIGO_RECUPERAR_SENHA = "Código para criar nova senha enviado com sucesso!";
+	public static String CODIGO_INVALIDO = "Código inválido!";
+	public static String SENHA_ALTERADA = "Senha alterada com sucesso!";
+
+	// ERROR
+	public static String ERROR_DESCONHECIDO = "Error desconhecido, tente novamente mais tarde!";
 
 }

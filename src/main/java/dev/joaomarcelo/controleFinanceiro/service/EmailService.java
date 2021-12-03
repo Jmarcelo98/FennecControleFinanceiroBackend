@@ -8,7 +8,7 @@ import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
 
 public interface EmailService {
 	
-	void enviarNovaSenhaEmail(Usuario usuario, String novaSenha);
+	void enviarCodigoSenha(Usuario usuario, String novaSenha);
 	
 	void enviarEmail(SimpleMailMessage msg); 
 	

@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final String[] ACESSO = { "/h2**/", "/h2/**", "/swagger-ui.html/**", "/swagger-ui.html**/**",
 			"/swagger-ui.html#/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
-			"/configuration/security", "/swagger-ui.html", "/webjars/**", "/auth/cadastro/**", "/status/**", "/status", "/status**", "/status/" };
+			"/configuration/security", "/swagger-ui.html", "/webjars/**", "/auth/cadastro/**", "/status/**", "/status", "/status**", "/status/"};
 
 	@Autowired
 	UserDetailsServiceImpl userDetailsService;
