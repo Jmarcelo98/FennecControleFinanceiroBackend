@@ -143,6 +143,12 @@ public class DBService {
 		Receita receita21 = new Receita(null, "Venda de controle", 140.0, cal18.getTime(), usuario1);
 		Receita receita22 = new Receita(null, "Cashback", 325.0, cal19.getTime(), usuario1);
 		Receita receita23 = new Receita(null, "Venda de Teclado", 2310.0, cal20.getTime(), usuario1);
+		Receita receita31 = new Receita(null, "Beneficios 6", 2200.0, new Date(), usuario1);
+		Receita receita30 = new Receita(null, "Beneficios 1", 300.0, new Date(), usuario1);
+		Receita receita26 = new Receita(null, "Beneficios 2", 1500.0, new Date(), usuario1);
+		Receita receita27 = new Receita(null, "Beneficios 3 ", 200.0, new Date(), usuario1);
+		Receita receita28 = new Receita(null, "Beneficios 4", 20.0, new Date(), usuario1);
+		Receita receita29 = new Receita(null, "Beneficios 5", 400.0, new Date(), usuario1);
 
 		Receita receita7 = new Receita(null, "Salário", 6500.00, cal2.getTime(), usuario2);
 		Receita receita8 = new Receita(null, "Venda do alimentação", 650.0, cal4.getTime(), usuario2);
@@ -152,7 +158,8 @@ public class DBService {
 
 		receitaRepository.saveAll(Arrays.asList(receita1, receita2, receita3, receita4, receita5, receita6, receita7,
 				receita8, receita9, receita10, receita11, receita12, receita13, receita14, receita15, receita16,
-				receita17, receita18, receita19, receita20, receita21, receita22, receita23 ,receita24, receita25));
+				receita17, receita18, receita19, receita20, receita21, receita22, receita23, receita24, receita25,
+				receita26, receita27, receita28, receita29, receita30, receita31));
 
 	}
 
