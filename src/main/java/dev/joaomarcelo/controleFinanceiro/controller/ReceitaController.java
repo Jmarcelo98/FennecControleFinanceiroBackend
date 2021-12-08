@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.joaomarcelo.controleFinanceiro.domain.Receita;
@@ -34,15 +35,24 @@ public class ReceitaController {
 	@Autowired
 	private JwtUtils idToken;
 
+	@GetMapping(path = "/quantidade/{ano}/{mes}")
+	public ResponseEntity<Integer> quantidadeDeReceitas(@PathVariable(value = "ano") Integer ano,
+			@PathVariable(value = "mes") Integer mes) {
+		return ResponseEntity.ok(receitaService.quantidadeDeReceitas(idToken.pegarIdPeloToken(), mes, ano));
+	}
+
 	// PEGAR TODAS AS RECEITA DO USUARIO OU DE ALGUM MÊS/ANO ESPECIFICO
 	@GetMapping(path = "/{ano}/{mes}")
 	public ResponseEntity<List<ReceitaDTO>> buscarTodasReceitasOuDeAcordoComOMesAno(
-			@PathVariable(value = "ano") Integer ano, @PathVariable(value = "mes") Integer mes) {
+			@PathVariable(value = "ano") Integer ano, @PathVariable(value = "mes") Integer mes,
+			@RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
+			@RequestParam(value = "linhasPorPagina", defaultValue = "5") Integer linhasPorPagina) {
 
 		List<Receita> list = new ArrayList<>();
 
 		if (ano != null && mes != null) {
-			list = receitaService.buscarTodasAsReceitasMesAno(idToken.pegarIdPeloToken(), mes, ano);
+			list = receitaService.buscarTodasAsReceitasMesAno(idToken.pegarIdPeloToken(), mes, ano, pagina,
+					linhasPorPagina);
 		} else {
 			list = receitaService.buscarTodasAsReceitas(idToken.pegarIdPeloToken());
 		}
@@ -71,7 +81,8 @@ public class ReceitaController {
 	@GetMapping(path = "valorReceitaMes/{ano}/{mes}")
 	public ResponseEntity<?> valorReceitaMesAnoPesquisado(@PathVariable(value = "ano") Integer ano,
 			@PathVariable(value = "mes") Integer mes) {
-		ResponseEntity<?> resultadoReceita = receitaService.valorReceitaMesAnoPesquisado(ano, mes, idToken.pegarIdPeloToken());
+		ResponseEntity<?> resultadoReceita = receitaService.valorReceitaMesAnoPesquisado(ano, mes,
+				idToken.pegarIdPeloToken());
 		return ResponseEntity.ok().body(resultadoReceita).getBody();
 	}
 

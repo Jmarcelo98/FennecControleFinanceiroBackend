@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -38,10 +39,20 @@ public class ReceitaService {
 		}
 	}
 
-	// BUSCAR TODAS AS RECEITAS DE EM UM MES/ANO DE ACORDO COM O ID DO USUARIO
-	public List<Receita> buscarTodasAsReceitasMesAno(Integer id, Integer mes, Integer ano) {
+	public Integer quantidadeDeReceitas(Integer id, Integer mes, Integer ano) {
 
-		Optional<List<Receita>> listaReceitas = receitaRepository.findByIdUsuarioMes(ano, mes, id);
+		return receitaRepository.quantidadeDeReceitas(ano, mes, id);
+
+	}
+
+	// BUSCAR TODAS AS RECEITAS DE EM UM MES/ANO DE ACORDO COM O ID DO USUARIO
+	public List<Receita> buscarTodasAsReceitasMesAno(Integer id, Integer mes, Integer ano, Integer pagina,
+			Integer linhasPorPagina) {
+
+		PageRequest pageRequest = PageRequest.of(pagina, linhasPorPagina);
+
+		Optional<List<Receita>> listaReceitas = receitaRepository.findReceitaByIdUsuarioPeloMesEAno(ano, mes, id,
+				pageRequest);
 
 		if (listaReceitas.get().size() == 0) {
 			throw new ObjetoNaoEncontrado(MensagensPersonalizadas.SEM_RECEITA);
