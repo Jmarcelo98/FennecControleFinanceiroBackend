@@ -20,7 +20,7 @@ public interface ReceitaRepository extends JpaRepository<Receita, Integer> {
 	Optional<List<Receita>> findByIdUsuario(@Param("id") Integer id);
 
 	@Transactional(readOnly = true)
-	@Query(value = "SELECT * FROM Receita obj WHERE YEAR(obj.data_receita)=?1 AND MONTH(obj.data_receita)=?2 AND obj.usuario_id=?3 ORDER BY data_receita desc, valor_receita DESC ", nativeQuery = true)
+	@Query(value = "SELECT * FROM Receita obj WHERE YEAR(obj.data_receita)=?1 AND MONTH(obj.data_receita)=?2 AND obj.usuario_id=?3 ORDER BY obj.data_receita desc, obj.valor_receita DESC ", nativeQuery = true)
 	Optional<List<Receita>> findReceitaByIdUsuarioPeloMesEAno(@Param("ano") Integer ano, @Param("mes") Integer mes, @Param("id") Integer id, Pageable pageRequest);
 	
 	@Transactional(readOnly = true)
@@ -28,7 +28,7 @@ public interface ReceitaRepository extends JpaRepository<Receita, Integer> {
 	Integer quantidadeDeReceitas(@Param("ano") Integer ano, @Param("mes") Integer mes, @Param("id") Integer id);
 
 	@Transactional(readOnly = true)
-	@Query(value = "SELECT obj.valor_receita FROM Receita obj WHERE YEAR(obj.data_receita)=?1 AND MONTH(obj.data_receita)=?2 AND obj.usuario_id=?3 ORDER BY data_receita desc ", nativeQuery = true)
+	@Query(value = "SELECT obj.valor_receita FROM Receita obj WHERE YEAR(obj.data_receita)=?1 AND MONTH(obj.data_receita)=?2 AND obj.usuario_id=?3 ORDER BY obj.data_receita desc ", nativeQuery = true)
 	List<Double> valoresReceitaDataAtual(@Param("ano") Integer ano, @Param("mes") Integer mes, @Param("id") Integer id);
 
 	@Transactional(readOnly = true)
