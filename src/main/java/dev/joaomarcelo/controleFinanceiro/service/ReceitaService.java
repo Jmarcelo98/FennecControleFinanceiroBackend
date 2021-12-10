@@ -15,7 +15,6 @@ import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
 import dev.joaomarcelo.controleFinanceiro.dto.ReceitaDTO;
 import dev.joaomarcelo.controleFinanceiro.repository.ReceitaRepository;
 import dev.joaomarcelo.controleFinanceiro.service.exception.ObjetoNaoEncontrado;
-import dev.joaomarcelo.controleFinanceiro.util.Datas;
 import dev.joaomarcelo.controleFinanceiro.util.MensagensPersonalizadas;
 
 @Service
@@ -39,7 +38,7 @@ public class ReceitaService {
 		}
 	}
 
-	public Integer quantidadeDeReceitas(Integer id, Integer mes, Integer ano) {
+	public Integer quantidadeDeReceitasMensal(Integer id, Integer mes, Integer ano) {
 
 		return receitaRepository.quantidadeDeReceitas(ano, mes, id);
 
@@ -109,23 +108,23 @@ public class ReceitaService {
 	}
 
 	// VALOR DA RECEITA NA DATA ATUAL
-	public ResponseEntity<?> valorReceitaDataAtual(Integer id) {
-
-		Double valorTotal = 0.0;
-
-		List<Double> valorResgatado = receitaRepository.valoresReceitaDataAtual(Datas.pegarAnoAtual(),
-				Datas.pegarMesAtual(), id);
-
-		if (valorResgatado.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(MensagensPersonalizadas.SEM_RECEITA_MES_ATUAL);
-		}
-
-		for (int i = 0; i < valorResgatado.size(); i++) {
-			valorTotal += valorResgatado.get(i);
-		}
-
-		return ResponseEntity.ok(valorTotal);
-	}
+//	public ResponseEntity<?> valorReceitaDataAtual(Integer id) {
+//
+//		Double valorTotal = 0.0;
+//
+//		List<Double> valorResgatado = receitaRepository.valoresReceitaDataAtual(Datas.pegarAnoAtual(),
+//				Datas.pegarMesAtual(), id);
+//
+//		if (valorResgatado.isEmpty()) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(MensagensPersonalizadas.SEM_RECEITA_MES_ATUAL);
+//		}
+//
+//		for (int i = 0; i < valorResgatado.size(); i++) {
+//			valorTotal += valorResgatado.get(i);
+//		}
+//
+//		return ResponseEntity.ok(valorTotal);
+//	}
 
 	public List<String> anosEmQueExisteReceita(Integer id) {
 		return receitaRepository.todosOsAnosQueExistemReceitas(id);

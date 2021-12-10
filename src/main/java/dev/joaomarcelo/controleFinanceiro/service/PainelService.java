@@ -1,6 +1,7 @@
 package dev.joaomarcelo.controleFinanceiro.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
@@ -31,11 +32,19 @@ public class PainelService {
 	@Autowired
 	private DespesaRepository despesaRepository;
 
-	public List<String> anosASeremMostrados(Integer id) {
+	public List<String> buscarTodosOsAnosEmQuePossuiReceitaOuDespesa(Integer id) {
 
 		List<String> todosAnos = new ArrayList<>(receitaService.anosEmQueExisteReceita(id));
 
 		List<String> despesasAnos = despesaService.anosEmQueExisteDespesa(id);
+		
+		for (int i = 0; i < todosAnos.size(); i++) {
+			System.err.println(todosAnos.get(i));
+		}
+		
+		for (int i = 0; i < despesasAnos.size(); i++) {
+			System.err.println(despesasAnos.get(i));
+		}
 
 		todosAnos.addAll(despesasAnos);
 
@@ -45,10 +54,10 @@ public class PainelService {
 
 	public ResponseEntity<?> painelValores(Integer id, Integer ano) {
 
-		PainelDTO pa = new PainelDTO(buscarDespesasMesDeAcordoComAno(id, ano), buscarReceitasMesDeAcordoComAno(id, ano),
+		PainelDTO painel = new PainelDTO(buscarDespesasMesDeAcordoComAno(id, ano), buscarReceitasMesDeAcordoComAno(id, ano),
 				painelValoresReceitaDespesaSaldo(id, ano));
 
-		return ResponseEntity.ok(pa);
+		return ResponseEntity.ok(painel);
 
 	}
 

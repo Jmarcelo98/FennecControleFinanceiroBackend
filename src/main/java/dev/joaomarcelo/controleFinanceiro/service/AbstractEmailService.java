@@ -13,7 +13,7 @@ public abstract class AbstractEmailService implements EmailService {
 	private String sender;
 
 	@Override
-	public void enviarCodigoSenha(Usuario usuario, String novaSenha) {
+	public void enviarCodigoRecuperacaoSenha(Usuario usuario, String novaSenha) {
 		SimpleMailMessage sm = prepararNovaSenhaEmail(usuario, novaSenha);
 		enviarEmail(sm);
 

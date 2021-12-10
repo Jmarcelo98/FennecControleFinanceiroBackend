@@ -24,7 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final String[] ACESSO = { "/h2**/", "/h2/**", "/swagger-ui.html/**", "/swagger-ui.html**/**",
 			"/swagger-ui.html#/**", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
-			"/configuration/security", "/swagger-ui.html", "/webjars/**", "/auth/cadastro/**", "/status/**", "/status", "/status**", "/status/"};
+			"/configuration/security", "/swagger-ui.html", "/webjars/**", "/auth/cadastro/**", "/status/**", "/status",
+			"/status**", "/status/" };
 
 	@Autowired
 	UserDetailsServiceImpl userDetailsService;
@@ -58,7 +59,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(ACESSO).permitAll().and().headers().frameOptions().sameOrigin();
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/auth/**", "/h2/**", "/status/**").permitAll().antMatchers(ACESSO).permitAll().anyRequest().authenticated();
+				.antMatchers("/auth/**", "/h2/**", "/status/**", "/usuario/enviar-codigo-email",
+						"/usuario/verificarCodigo", "/usuario/nova-senha")
+				.permitAll().antMatchers(ACESSO).permitAll().anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}

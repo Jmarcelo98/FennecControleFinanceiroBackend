@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.joaomarcelo.controleFinanceiro.security.jwt.JwtUtils;
@@ -25,16 +25,16 @@ public class PainelController {
 	private JwtUtils idToken;
 
 	// PEGAR TODOS OS ANOS
-	@GetMapping(path = "anos")
-	public ResponseEntity<List<String>> buscarTodasReceitasOuDespesasAcordoComOMesAno() {
+	@GetMapping(path = "/anos")
+	public ResponseEntity<List<String>> buscarTodosOsAnosEmQuePossuiReceitaOuDespesa() {
 
-		List<String> anosDasReceitasEDespesas = painelService.anosASeremMostrados(idToken.pegarIdPeloToken());
+		List<String> anosDasReceitasEDespesas = painelService.buscarTodosOsAnosEmQuePossuiReceitaOuDespesa(idToken.pegarIdPeloToken());
 
 		return ResponseEntity.ok().body(anosDasReceitasEDespesas);
 	}
 	
-	@GetMapping(path = "/{ano}")
-	public ResponseEntity<?> teste(@PathVariable(value = "ano") Integer ano) {
+	@GetMapping(path = "/ano")
+	public ResponseEntity<?> painelValores(@RequestParam Integer ano) {
 		return painelService.painelValores(idToken.pegarIdPeloToken(), ano);
 	}
 

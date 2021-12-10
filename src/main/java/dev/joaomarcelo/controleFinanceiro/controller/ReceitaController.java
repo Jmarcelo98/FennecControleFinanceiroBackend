@@ -35,17 +35,15 @@ public class ReceitaController {
 	@Autowired
 	private JwtUtils idToken;
 
-	@GetMapping(path = "/quantidade/{ano}/{mes}")
-	public ResponseEntity<Integer> quantidadeDeReceitas(@PathVariable(value = "ano") Integer ano,
-			@PathVariable(value = "mes") Integer mes) {
-		return ResponseEntity.ok(receitaService.quantidadeDeReceitas(idToken.pegarIdPeloToken(), mes, ano));
+	@GetMapping(path = "/quantidade-mensal")
+	public ResponseEntity<Integer> quantidadeDeReceitasMensal(@RequestParam Integer ano, @RequestParam Integer mes) {
+		return ResponseEntity.ok(receitaService.quantidadeDeReceitasMensal(idToken.pegarIdPeloToken(), mes, ano));
 	}
 
 	// PEGAR TODAS AS RECEITA DO USUARIO OU DE ALGUM MÊS/ANO ESPECIFICO
-	@GetMapping(path = "/{ano}/{mes}")
-	public ResponseEntity<List<ReceitaDTO>> buscarTodasReceitasOuDeAcordoComOMesAno(
-			@PathVariable(value = "ano") Integer ano, @PathVariable(value = "mes") Integer mes,
-			@RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
+	@GetMapping(path = "data/mensal-anual")
+	public ResponseEntity<List<ReceitaDTO>> buscarTodasReceitasOuDeAcordoComOMesAno(@RequestParam Integer ano,
+			@RequestParam Integer mes, @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
 			@RequestParam(value = "linhasPorPagina", defaultValue = "5") Integer linhasPorPagina) {
 
 		List<Receita> list = new ArrayList<>();
@@ -78,18 +76,17 @@ public class ReceitaController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@GetMapping(path = "valorReceitaMes/{ano}/{mes}")
-	public ResponseEntity<?> valorReceitaMesAnoPesquisado(@PathVariable(value = "ano") Integer ano,
-			@PathVariable(value = "mes") Integer mes) {
+	@GetMapping(path = "valor-total/mensal-anual")
+	public ResponseEntity<?> valorDaReceitaMesAnoPesquisado(@RequestParam Integer ano, @RequestParam Integer mes) {
 		ResponseEntity<?> resultadoReceita = receitaService.valorReceitaMesAnoPesquisado(ano, mes,
 				idToken.pegarIdPeloToken());
 		return ResponseEntity.ok().body(resultadoReceita).getBody();
 	}
 
-	@GetMapping(path = "valorReceitaMes")
-	public ResponseEntity<?> valorReceitaDataAtual() {
-		ResponseEntity<?> resultadoReceita = receitaService.valorReceitaDataAtual(idToken.pegarIdPeloToken());
-		return ResponseEntity.ok().body(resultadoReceita).getBody();
-	}
+//	@GetMapping(path = "valorReceitaMes")
+//	public ResponseEntity<?> valorReceitaDataAtual() {
+//		ResponseEntity<?> resultadoReceita = receitaService.valorReceitaDataAtual(idToken.pegarIdPeloToken());
+//		return ResponseEntity.ok().body(resultadoReceita).getBody();
+//	}
 
 }

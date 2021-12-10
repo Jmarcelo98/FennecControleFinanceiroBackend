@@ -20,7 +20,7 @@ public interface ReceitaRepository extends JpaRepository<Receita, Integer> {
 	Optional<List<Receita>> findByIdUsuario(@Param("id") Integer id);
 
 	@Transactional(readOnly = true)
-	@Query(value = "SELECT * FROM Receita obj WHERE YEAR(obj.data_receita)=?1 AND MONTH(obj.data_receita)=?2 AND obj.usuario_id=?3 ORDER BY obj.data_receita desc, obj.valor_receita DESC ", nativeQuery = true)
+	@Query(value = "SELECT * FROM Receita obj WHERE YEAR(obj.data_receita)=?1 AND MONTH(obj.data_receita)=?2 AND obj.usuario_id=?3 ORDER BY DAY(obj.data_receita) desc, obj.valor_receita DESC, obj.nome_receita ASC ", nativeQuery = true)
 	Optional<List<Receita>> findReceitaByIdUsuarioPeloMesEAno(@Param("ano") Integer ano, @Param("mes") Integer mes, @Param("id") Integer id, Pageable pageRequest);
 	
 	@Transactional(readOnly = true)

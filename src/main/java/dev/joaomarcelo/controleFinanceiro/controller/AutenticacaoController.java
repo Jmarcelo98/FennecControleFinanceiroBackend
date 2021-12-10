@@ -10,16 +10,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
-import dev.joaomarcelo.controleFinanceiro.dto.EmailDTO;
 import dev.joaomarcelo.controleFinanceiro.payload.request.LoginRequest;
 import dev.joaomarcelo.controleFinanceiro.payload.request.RegistrarRequest;
 import dev.joaomarcelo.controleFinanceiro.payload.response.JwtResponse;
@@ -27,8 +23,6 @@ import dev.joaomarcelo.controleFinanceiro.payload.response.MessageResponse;
 import dev.joaomarcelo.controleFinanceiro.repository.UsuarioRepository;
 import dev.joaomarcelo.controleFinanceiro.security.jwt.JwtUtils;
 import dev.joaomarcelo.controleFinanceiro.security.services.UserDetailsImpl;
-import dev.joaomarcelo.controleFinanceiro.service.AutenticacaoService;
-import dev.joaomarcelo.controleFinanceiro.service.UsuarioService;
 import dev.joaomarcelo.controleFinanceiro.util.FormatarPalavras;
 import dev.joaomarcelo.controleFinanceiro.util.MensagensPersonalizadas;
 
@@ -43,12 +37,6 @@ public class AutenticacaoController {
 	@Autowired
 	UsuarioRepository usuarioRepository;
 
-	@Autowired
-	private AutenticacaoService autenticacaoService;
-	
-	@Autowired 
-	private UsuarioService usuarioService;
-	
 	@Autowired
 	private BCryptPasswordEncoder codificador;
 
@@ -86,7 +74,7 @@ public class AutenticacaoController {
 				new JwtResponse(jwt, userDetails.getId(), userDetails.getNome(), userDetails.getSobrenome(), false));
 	}
 
-	@PostMapping(value = "cadastro")
+	@PostMapping(value = "cadastrar")
 	public ResponseEntity<?> novoUsuario(@RequestBody @Valid RegistrarRequest signUpRequest) {
 
 		if (usuarioRepository.existsByEmail(FormatarPalavras.caixaAlta(signUpRequest.getEmail()))) {
@@ -104,23 +92,23 @@ public class AutenticacaoController {
 		return ResponseEntity.ok(new MessageResponse(MensagensPersonalizadas.USUARIO_CADASTRADO_COM_SUCESSO));
 	}
 
-	@PostMapping(path = "recuperar-senha")
-	public ResponseEntity<?> esqueciASenha(@Valid @RequestBody EmailDTO emailDTO) {
-		return autenticacaoService.enviarCodigo(emailDTO.getEmail());
-
-	}
-
-	@GetMapping(path = "{email}/{codigo}")
-	public ResponseEntity<?> verificarCodigo(@PathVariable(value = "email") String email,
-			@PathVariable(value = "codigo") String codigo) {
-
-		return autenticacaoService.verificarCodigo(email, codigo);
-	}
+//	@PostMapping(path = "recuperar-senha")
+//	public ResponseEntity<?> esqueciASenha(@Valid @RequestBody EmailDTO emailDTO) {
+//		return autenticacaoService.enviarCodigo(emailDTO.getEmail());
+//
+//	}
+//
+//	@GetMapping(path = "{email}/{codigo}")
+//	public ResponseEntity<?> verificarCodigo(@PathVariable(value = "email") String email,
+//			@PathVariable(value = "codigo") String codigo) {
+//
+//		return autenticacaoService.verificarCodigo(email, codigo);
+//	}
 	
-	@PutMapping(value = "atualizarSenha")
-	public ResponseEntity<?> atualizarSenha(@RequestBody @Valid LoginRequest loginRequest) {
-		return usuarioService.atualizarSenha(loginRequest.getEmail(), loginRequest.getSenha());
-	}
+//	@PutMapping(value = "nova-senha")
+//	public ResponseEntity<?> atualizarSenha(@RequestBody @Valid LoginRequest loginRequest) {
+//		return usuarioService.atualizarSenha(loginRequest.getEmail(), loginRequest.getSenha());
+//	}
 
 
 //	@PostMapping(value = "/refresh_token")

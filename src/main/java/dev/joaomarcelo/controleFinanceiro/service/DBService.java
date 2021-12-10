@@ -77,13 +77,14 @@ public class DBService {
 		cal17.set(2021, 8, 1, 10, 32, 22);
 		cal18.set(2021, 9, 1, 10, 32, 22);
 		cal19.set(2021, 10, 1, 10, 32, 22);
-		cal20.set(2021, 11, 10, 0, 0, 1);
+		cal20.set(2021, 11, 22, 0, 0, 1);
 
 		cal21.set(2020, 12, 10, 0, 0, 1);
+		
 
 		// USUARIO
 		Usuario usuario1 = new Usuario("João", "Marcelo", "JOAOMARCELO588@GMAIL.COM", codificador.encode("123456"),
-				null);
+				"136LHY");
 
 		Usuario usuario2 = new Usuario("Matheus", "Sena", "SENAVS@GMAIL.COM", codificador.encode("123456"), null);
 
@@ -137,12 +138,12 @@ public class DBService {
 		Receita receita17 = new Receita(null, "Bonificação", 800.0, cal13.getTime(), usuario1);
 		Receita receita18 = new Receita(null, "Décimo terceiro", 2850.0, cal14.getTime(), usuario1);
 		Receita receita19 = new Receita(null, "Venda de cadeira", 760.0, cal15.getTime(), usuario1);
-		Receita receita24 = new Receita(null, "Venda de teclado", 270.0, cal15.getTime(), usuario1);
+		Receita receita24 = new Receita(null, "Venda de teclado antigo", 270.0, cal15.getTime(), usuario1);
 		Receita receita25 = new Receita(null, "Venda do copo Stanley", 200.0, cal15.getTime(), usuario1);
 		Receita receita20 = new Receita(null, "Venda de monitor secundário", 1300.0, cal16.getTime(), usuario1);
 		Receita receita21 = new Receita(null, "Venda de controle", 140.0, cal18.getTime(), usuario1);
 		Receita receita22 = new Receita(null, "Cashback", 325.0, cal19.getTime(), usuario1);
-		Receita receita23 = new Receita(null, "Venda de Teclado", 2310.0, cal20.getTime(), usuario1);
+		Receita receita23 = new Receita(null, "Venda de Teclado Redragon", 2310.0, cal20.getTime(), usuario1);
 		Receita receita31 = new Receita(null, "Beneficios 6", 2200.0, new Date(), usuario1);
 		Receita receita30 = new Receita(null, "Beneficios 1", 300.0, new Date(), usuario1);
 		Receita receita26 = new Receita(null, "Beneficios 2", 1500.0, new Date(), usuario1);
