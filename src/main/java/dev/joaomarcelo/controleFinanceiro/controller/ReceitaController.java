@@ -1,5 +1,6 @@
 package dev.joaomarcelo.controleFinanceiro.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,19 +36,24 @@ public class ReceitaController {
 	private JwtUtils idToken;
 
 	@GetMapping(path = "/quantidade-mensal")
-	public ResponseEntity<Integer> quantidadeDeReceitasMensal(@RequestParam Integer ano, @RequestParam Integer mes) {
-		return ResponseEntity.ok(receitaService.quantidadeDeReceitasMensal(idToken.pegarIdPeloToken(), mes, ano));
+	public ResponseEntity<Integer> quantidadeDeReceitasMensal(@RequestParam(value = "data") Date data) {
+		return ResponseEntity.ok(receitaService.quantidadeDeReceitasMensal(idToken.pegarIdPeloToken(), data));
+	}
+
+	@GetMapping(path = "/dataMaisRecente")
+	public ResponseEntity<Date> buscarDataMaisRecenteDaReceita() {
+		return ResponseEntity.ok(receitaService.buscarDataMaisRecenteDaReceita(idToken.pegarIdPeloToken()));
 	}
 
 	// PEGAR TODAS AS RECEITA DO USUARIO OU DE ALGUM MÊS/ANO ESPECIFICO
 	@GetMapping(path = "data/mensal-anual")
-	public ResponseEntity<List<ReceitaDTO>> buscarTodasReceitasOuDeAcordoComOMesAno(@RequestParam Integer ano,
-			@RequestParam Integer mes, @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
+	public ResponseEntity<List<ReceitaDTO>> buscarTodasReceitasOuDeAcordoComOMesAno(
+			@RequestParam(value = "data") Date data, @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
 			@RequestParam(value = "linhasPorPagina", defaultValue = "5") Integer linhasPorPagina) {
 
-		List<Receita> list = receitaService.buscarTodasAsReceitasMesAno(idToken.pegarIdPeloToken(), mes, ano, pagina,
+		List<Receita> list = receitaService.buscarTodasAsReceitasMesAno(idToken.pegarIdPeloToken(), data, pagina,
 				linhasPorPagina);
-	
+
 		List<ReceitaDTO> listDto = list.stream().map(obj -> new ReceitaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
@@ -70,9 +76,9 @@ public class ReceitaController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@GetMapping(path = "valor-total/mensal-anual")
-	public ResponseEntity<?> valorDaReceitaMesAnoPesquisado(@RequestParam Integer ano, @RequestParam Integer mes) {
-		ResponseEntity<?> resultadoReceita = receitaService.valorReceitaMesAnoPesquisado(ano, mes,
+	@GetMapping(path = "/valor-total/mensal-anual")
+	public ResponseEntity<?> valorDaReceitaMesAnoPesquisado(@RequestParam(value = "data") Date data) {
+		ResponseEntity<?> resultadoReceita = receitaService.valorReceitaMesAnoPesquisado(data,
 				idToken.pegarIdPeloToken());
 		return ResponseEntity.ok().body(resultadoReceita).getBody();
 	}

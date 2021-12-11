@@ -1,6 +1,7 @@
 package dev.joaomarcelo.controleFinanceiro.service;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import org.springframework.stereotype.Service;
 
 import dev.joaomarcelo.controleFinanceiro.domain.Receita;
 import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
+import dev.joaomarcelo.controleFinanceiro.dto.MesAnoDTO;
 import dev.joaomarcelo.controleFinanceiro.dto.ReceitaDTO;
 import dev.joaomarcelo.controleFinanceiro.repository.ReceitaRepository;
 import dev.joaomarcelo.controleFinanceiro.service.exception.ObjetoNaoEncontrado;
+import dev.joaomarcelo.controleFinanceiro.util.Datas;
 import dev.joaomarcelo.controleFinanceiro.util.MensagensPersonalizadas;
 
 @Service
@@ -24,6 +27,8 @@ public class ReceitaService {
 
 	@Autowired
 	private ReceitaRepository receitaRepository;
+
+	private Datas datas = new Datas();
 
 //	// BUSCAR TODAS AS RECEITAS DO USUARIO
 //	public List<Receita> buscarTodasAsReceitas(Integer id) {
@@ -37,19 +42,35 @@ public class ReceitaService {
 //		}
 //	}
 
-	public Integer quantidadeDeReceitasMensal(Integer id, Integer mes, Integer ano) {
+	public Date buscarDataMaisRecenteDaReceita(Integer id) {
 
-		return receitaRepository.quantidadeDeReceitas(ano, mes, id);
+		Date dataReceitaMaisRecente = receitaRepository.buscarDataMaisRecenteDaReceita(id);
+
+		if (dataReceitaMaisRecente == null) {
+			throw new ObjetoNaoEncontrado(MensagensPersonalizadas.SEM_RECEITA_CADASTRADO);
+		}
+
+		return dataReceitaMaisRecente;
+
+	}
+
+	public Integer quantidadeDeReceitasMensal(Integer id, Date data) {
+
+		MesAnoDTO mesAnoDTO = datas.retornarAnoEMes(data);
+
+		return receitaRepository.quantidadeDeReceitas(mesAnoDTO.getAno(), mesAnoDTO.getMes(), id);
 
 	}
 
 	// BUSCAR TODAS AS RECEITAS DE EM UM MES/ANO DE ACORDO COM O ID DO USUARIO
-	public List<Receita> buscarTodasAsReceitasMesAno(Integer id, Integer mes, Integer ano, Integer pagina,
-			Integer linhasPorPagina) {
+	public List<Receita> buscarTodasAsReceitasMesAno(Integer id, Date data, Integer pagina, Integer linhasPorPagina) {
 
 		PageRequest pageRequest = PageRequest.of(pagina, linhasPorPagina);
 
-		List<Receita> listaReceitas = receitaRepository.findReceitaByIdUsuarioPeloMesEAno(ano, mes, id, pageRequest);
+		MesAnoDTO mesAnoDTO = datas.retornarAnoEMes(data);
+
+		List<Receita> listaReceitas = receitaRepository.findReceitaByIdUsuarioPeloMesEAno(mesAnoDTO.getAno(),
+				mesAnoDTO.getMes(), id, pageRequest);
 
 		if (listaReceitas.size() == 0) {
 			throw new ObjetoNaoEncontrado(MensagensPersonalizadas.SEM_RECEITA);
@@ -83,11 +104,14 @@ public class ReceitaService {
 
 	}
 
-	public ResponseEntity<?> valorReceitaMesAnoPesquisado(Integer ano, Integer mes, Integer id) {
+	public ResponseEntity<?> valorReceitaMesAnoPesquisado(Date data, Integer id) {
 
 		Double valorTotal = 0.0;
 
-		List<Double> valorResgatado = receitaRepository.valoresReceitaDataAtual(ano, mes, id);
+		MesAnoDTO mesAnoDTO = datas.retornarAnoEMes(data);
+
+		List<Double> valorResgatado = receitaRepository.valoresReceitaDataAtual(mesAnoDTO.getAno(), mesAnoDTO.getMes(),
+				id);
 
 		if (valorResgatado.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(MensagensPersonalizadas.SEM_RECEITA_MES_ATUAL);
@@ -127,5 +151,16 @@ public class ReceitaService {
 	public List<String> anosEmQueExisteReceita(Integer id) {
 		return receitaRepository.todosOsAnosQueExistemReceitas(id);
 	}
+
+//	private MesAnoDTO retornarAnoEMes(Date data) {
+//
+//		Calendar cal = Calendar.getInstance();
+//
+//		cal.setTime(data);
+//
+//		MesAnoDTO mesAnoDTO = new MesAnoDTO(cal.get(Calendar.MONTH) + 1, cal.get(Calendar.YEAR));
+//
+//		return mesAnoDTO;
+//	}
 
 }

@@ -52,6 +52,12 @@ public class DBService {
 	private Calendar cal19 = Calendar.getInstance();
 	private Calendar cal20 = Calendar.getInstance();
 	private Calendar cal21 = Calendar.getInstance();
+	private Calendar cal22 = Calendar.getInstance();
+	private Calendar cal23 = Calendar.getInstance();
+	private Calendar cal24 = Calendar.getInstance();
+	private Calendar cal25 = Calendar.getInstance();
+	private Calendar cal26 = Calendar.getInstance();
+	
 
 	public void instaciarTesteBancoDeDados() {
 
@@ -77,8 +83,14 @@ public class DBService {
 		cal17.set(2021, 8, 1, 10, 32, 22);
 		cal18.set(2021, 9, 1, 10, 32, 22);
 		cal19.set(2021, 10, 1, 10, 32, 22);
-		cal20.set(2021, 11, 22, 0, 0, 1);
-
+		cal20.set(2021, 11, 7, 0, 0, 1);
+		cal21.set(2021, 11, 1, 0, 0, 1);
+		cal22.set(2021, 11, 4, 0, 0, 1);
+		cal23.set(2021, 11, 4, 0, 0, 1);
+		cal24.set(2021, 11, 2, 0, 0, 1);
+		cal25.set(2021, 11, 8, 0, 0, 1);
+		cal26.set(2021, 11, 9, 0, 0, 1);
+		
 		cal21.set(2020, 12, 10, 0, 0, 1);
 		
 
@@ -144,23 +156,24 @@ public class DBService {
 		Receita receita21 = new Receita(null, "Venda de controle", 140.0, cal18.getTime(), usuario1);
 		Receita receita22 = new Receita(null, "Cashback", 325.0, cal19.getTime(), usuario1);
 		Receita receita23 = new Receita(null, "Venda de Teclado Redragon", 2310.0, cal20.getTime(), usuario1);
-		Receita receita31 = new Receita(null, "Beneficios 6", 2200.0, new Date(), usuario1);
-		Receita receita30 = new Receita(null, "Beneficios 1", 300.0, new Date(), usuario1);
-		Receita receita26 = new Receita(null, "Beneficios 2", 1500.0, new Date(), usuario1);
-		Receita receita27 = new Receita(null, "Beneficios 3 ", 200.0, new Date(), usuario1);
-		Receita receita28 = new Receita(null, "Beneficios 4", 20.0, new Date(), usuario1);
-		Receita receita29 = new Receita(null, "Beneficios 5", 400.0, new Date(), usuario1);
-
-		Receita receita7 = new Receita(null, "Salário", 6500.00, cal2.getTime(), usuario2);
+		Receita receita31 = new Receita(null, "Freelancer", 2200.0, cal21.getTime(), usuario1);
+		Receita receita30 = new Receita(null, "CSGORoll", 300.0, cal21.getTime(), usuario1);
+		Receita receita26 = new Receita(null, "VAMOS GG", 1500.0, cal23.getTime(), usuario1);
+		Receita receita27 = new Receita(null, "Refeição vendido", 200.0, cal24.getTime(), usuario1);
+		Receita receita28 = new Receita(null, "Lavagem de carro", 20.0, cal25.getTime(), usuario1);
+		Receita receita29 = new Receita(null, "Recebido da Tauany", 254.23, cal26.getTime(), usuario1);
+		Receita receita32 = new Receita(null, "Décimo terceiro", 800.0, new Date(), usuario1);
+		
+		Receita receita7 = new Receita(null, "Salário", 6500.00, cal7.getTime(), usuario2);
 		Receita receita8 = new Receita(null, "Venda do alimentação", 650.0, cal4.getTime(), usuario2);
 		Receita receita9 = new Receita(null, "Bônus do plantão", 260.0, cal6.getTime(), usuario2);
 		Receita receita10 = new Receita(null, "Teste1", 460.0, cal7.getTime(), usuario2);
-		Receita receita11 = new Receita(null, "Teste 2", 1460.0, cal8.getTime(), usuario2);
+		Receita receita11 = new Receita(null, "Teste 2", 1460.0, cal19.getTime(), usuario2);
 
 		receitaRepository.saveAll(Arrays.asList(receita1, receita2, receita3, receita4, receita5, receita6, receita7,
 				receita8, receita9, receita10, receita11, receita12, receita13, receita14, receita15, receita16,
 				receita17, receita18, receita19, receita20, receita21, receita22, receita23, receita24, receita25,
-				receita26, receita27, receita28, receita29, receita30, receita31));
+				receita26, receita27, receita28, receita29, receita30, receita31, receita32));
 
 	}
 

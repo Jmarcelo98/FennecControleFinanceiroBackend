@@ -3,6 +3,7 @@ package dev.joaomarcelo.controleFinanceiro.util;
 public class MensagensPersonalizadas {
 
 //	RECEITAS
+	public static String SEM_RECEITA_CADASTRADO = "Você não possui receitas cadastradas no sistema";
 	public static String SEM_RECEITA = "Você não possui receitas no mês pesquisado!";
 	public static String SEM_RECEITA_MES_ATUAL = "Você não possui receitas no mês atual!";
 	public static String RECEITA_EXCLUIDA_COM_SUCESSO = "Receita removida com sucesso!";
