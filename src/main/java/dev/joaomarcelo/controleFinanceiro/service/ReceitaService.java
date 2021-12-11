@@ -2,7 +2,6 @@ package dev.joaomarcelo.controleFinanceiro.service;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -26,17 +25,17 @@ public class ReceitaService {
 	@Autowired
 	private ReceitaRepository receitaRepository;
 
-	// BUSCAR TODAS AS RECEITAS DO USUARIO
-	public List<Receita> buscarTodasAsReceitas(Integer id) {
-
-		Optional<List<Receita>> listaReceitas = receitaRepository.findByIdUsuario(id);
-
-		if (listaReceitas.get().size() == 0) {
-			throw new ObjetoNaoEncontrado(MensagensPersonalizadas.SEM_RECEITA);
-		} else {
-			return listaReceitas.get();
-		}
-	}
+//	// BUSCAR TODAS AS RECEITAS DO USUARIO
+//	public List<Receita> buscarTodasAsReceitas(Integer id) {
+//
+//		Optional<List<Receita>> listaReceitas = receitaRepository.findByIdUsuario(id);
+//
+//		if (listaReceitas.get().size() == 0) {
+//			throw new ObjetoNaoEncontrado(MensagensPersonalizadas.SEM_RECEITA);
+//		} else {
+//			return listaReceitas.get();
+//		}
+//	}
 
 	public Integer quantidadeDeReceitasMensal(Integer id, Integer mes, Integer ano) {
 
@@ -50,13 +49,12 @@ public class ReceitaService {
 
 		PageRequest pageRequest = PageRequest.of(pagina, linhasPorPagina);
 
-		Optional<List<Receita>> listaReceitas = receitaRepository.findReceitaByIdUsuarioPeloMesEAno(ano, mes, id,
-				pageRequest);
+		List<Receita> listaReceitas = receitaRepository.findReceitaByIdUsuarioPeloMesEAno(ano, mes, id, pageRequest);
 
-		if (listaReceitas.get().size() == 0) {
+		if (listaReceitas.size() == 0) {
 			throw new ObjetoNaoEncontrado(MensagensPersonalizadas.SEM_RECEITA);
 		} else {
-			return listaReceitas.get();
+			return listaReceitas;
 		}
 	}
 

@@ -26,7 +26,7 @@ public class UsuarioService {
 	private EmailService emailService;
 
 	private Random random = new Random();
-	
+
 	@Autowired
 	private BCryptPasswordEncoder codificador;
 
@@ -44,7 +44,7 @@ public class UsuarioService {
 		}
 
 	}
-	
+
 	public ResponseEntity<?> enviarCodigo(String email) {
 
 		Optional<Usuario> usuario = buscarPeloEmail(FormatarPalavras.caixaAlta(email).trim());
@@ -57,7 +57,7 @@ public class UsuarioService {
 
 		emailService.enviarCodigoRecuperacaoSenha(usuario.get(), novaSenhaAleatoria);
 
-		usuario.get().setCodigoRecuperacaoSenha(novaSenhaAleatoria);
+		usuario.get().setCodigoRecuperacaoSenha(codificador.encode(novaSenhaAleatoria));
 
 		usuarioRepository.save(usuario.get());
 
@@ -67,16 +67,13 @@ public class UsuarioService {
 
 	public ResponseEntity<?> verificarCodigo(String email, String codigo) {
 
-		if (usuarioRepository.existsByEmailAndCodigoRecuperacaoSenha(FormatarPalavras.caixaAlta(email).trim(),
-				codigo)) {
+		if (codificador.matches(codigo, usuarioRepository.recuperandoCodigoCriptografado(FormatarPalavras.caixaAlta(email)))) {
 			return ResponseEntity.ok(true);
 		} else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(MensagensPersonalizadas.CODIGO_INVALIDO);
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(MensagensPersonalizadas.CODIGO_INVALIDO);
 		}
 
 	}
-
-
 
 	public Usuario buscarPeloId(Integer id) {
 		Optional<Usuario> obj = usuarioRepository.findById(id);
@@ -112,5 +109,5 @@ public class UsuarioService {
 		}
 
 	}
-	
+
 }

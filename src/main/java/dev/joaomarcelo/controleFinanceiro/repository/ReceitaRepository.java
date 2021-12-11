@@ -1,7 +1,6 @@
 package dev.joaomarcelo.controleFinanceiro.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,13 +14,13 @@ import dev.joaomarcelo.controleFinanceiro.domain.Receita;
 @Repository
 public interface ReceitaRepository extends JpaRepository<Receita, Integer> {
 
-	@Transactional(readOnly = true)
-	@Query(value = "SELECT * FROM Receita obj WHERE obj.usuario_id = ? ORDER BY data_receita desc", nativeQuery = true)
-	Optional<List<Receita>> findByIdUsuario(@Param("id") Integer id);
+//	@Transactional(readOnly = true)
+//	@Query(value = "SELECT * FROM Receita obj WHERE obj.usuario = ? ORDER BY dataReceita desc")
+//	Optional<List<Receita>> findByIdUsuario(@Param("id") Integer id);
 
 	@Transactional(readOnly = true)
-	@Query(value = "SELECT * FROM Receita obj WHERE YEAR(obj.data_receita)=?1 AND MONTH(obj.data_receita)=?2 AND obj.usuario_id=?3 ORDER BY DAY(obj.data_receita) desc, obj.valor_receita DESC, obj.nome_receita ASC ", nativeQuery = true)
-	Optional<List<Receita>> findReceitaByIdUsuarioPeloMesEAno(@Param("ano") Integer ano, @Param("mes") Integer mes, @Param("id") Integer id, Pageable pageRequest);
+	@Query(value = "SELECT * FROM Receita obj WHERE YEAR(obj.data_receita)=?1 AND MONTH(obj.data_receita)=?2 AND obj.usuario_id=?3 ORDER BY obj.data_receita desc, obj.valor_receita DESC, obj.nome_receita ASC ", nativeQuery = true)
+	List<Receita> findReceitaByIdUsuarioPeloMesEAno(@Param("ano") Integer ano, @Param("mes") Integer mes, @Param("id") Integer id, Pageable pageRequest);
 	
 	@Transactional(readOnly = true)
 	@Query(value = "SELECT COUNT(*) FROM Receita obj WHERE YEAR(obj.data_receita)=?1 AND MONTH(obj.data_receita)=?2 AND obj.usuario_id=?3", nativeQuery = true)

@@ -1,6 +1,5 @@
 package dev.joaomarcelo.controleFinanceiro.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,14 +45,9 @@ public class ReceitaController {
 			@RequestParam Integer mes, @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
 			@RequestParam(value = "linhasPorPagina", defaultValue = "5") Integer linhasPorPagina) {
 
-		List<Receita> list = new ArrayList<>();
-
-		if (ano != null && mes != null) {
-			list = receitaService.buscarTodasAsReceitasMesAno(idToken.pegarIdPeloToken(), mes, ano, pagina,
-					linhasPorPagina);
-		} else {
-			list = receitaService.buscarTodasAsReceitas(idToken.pegarIdPeloToken());
-		}
+		List<Receita> list = receitaService.buscarTodasAsReceitasMesAno(idToken.pegarIdPeloToken(), mes, ano, pagina,
+				linhasPorPagina);
+	
 		List<ReceitaDTO> listDto = list.stream().map(obj -> new ReceitaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}

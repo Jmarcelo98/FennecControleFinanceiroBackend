@@ -84,7 +84,7 @@ public class DBService {
 
 		// USUARIO
 		Usuario usuario1 = new Usuario("João", "Marcelo", "JOAOMARCELO588@GMAIL.COM", codificador.encode("123456"),
-				"136LHY");
+				null);
 
 		Usuario usuario2 = new Usuario("Matheus", "Sena", "SENAVS@GMAIL.COM", codificador.encode("123456"), null);
 

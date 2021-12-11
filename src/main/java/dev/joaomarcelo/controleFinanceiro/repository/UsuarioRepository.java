@@ -23,5 +23,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 	Boolean existsByEmailAndCodigoRecuperacaoSenha(String email, String codigo);
 	
+	@Transactional(readOnly = true)
+	@Query(value = "SELECT user.codigoRecuperacaoSenha FROM Usuario user WHERE user.email = ?1")
+	String recuperandoCodigoCriptografado(String email);	
+	
 
 }

@@ -1,7 +1,6 @@
 package dev.joaomarcelo.controleFinanceiro.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
@@ -37,14 +36,6 @@ public class PainelService {
 		List<String> todosAnos = new ArrayList<>(receitaService.anosEmQueExisteReceita(id));
 
 		List<String> despesasAnos = despesaService.anosEmQueExisteDespesa(id);
-		
-		for (int i = 0; i < todosAnos.size(); i++) {
-			System.err.println(todosAnos.get(i));
-		}
-		
-		for (int i = 0; i < despesasAnos.size(); i++) {
-			System.err.println(despesasAnos.get(i));
-		}
 
 		todosAnos.addAll(despesasAnos);
 

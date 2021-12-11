@@ -3,8 +3,6 @@ package dev.joaomarcelo.controleFinanceiro.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import dev.joaomarcelo.controleFinanceiro.domain.Receita;
 
 public class ReceitaDTO implements Serializable {

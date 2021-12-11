@@ -59,8 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(ACESSO).permitAll().and().headers().frameOptions().sameOrigin();
 		http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-				.antMatchers("/auth/**", "/h2/**", "/status/**", "/usuario/enviar-codigo-email",
-						"/usuario/verificarCodigo", "/usuario/nova-senha")
+				.antMatchers("/auth/**", "/h2/**", "/status/**", "/usuario/nova-senha",
+						"/usuario/enviar-codigo-email", "/usuario/verificarCodigo")
 				.permitAll().antMatchers(ACESSO).permitAll().anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
