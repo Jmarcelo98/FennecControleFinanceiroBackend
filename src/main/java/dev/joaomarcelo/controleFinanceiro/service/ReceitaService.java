@@ -30,17 +30,13 @@ public class ReceitaService {
 
 	private Datas datas = new Datas();
 
-//	// BUSCAR TODAS AS RECEITAS DO USUARIO
-//	public List<Receita> buscarTodasAsReceitas(Integer id) {
-//
-//		Optional<List<Receita>> listaReceitas = receitaRepository.findByIdUsuario(id);
-//
-//		if (listaReceitas.get().size() == 0) {
-//			throw new ObjetoNaoEncontrado(MensagensPersonalizadas.SEM_RECEITA);
-//		} else {
-//			return listaReceitas.get();
-//		}
-//	}
+	public Integer quantidadeDeReceitasMensal(Integer id, Date data) {
+
+		MesAnoDTO mesAnoDTO = datas.retornarAnoEMes(data);
+
+		return receitaRepository.quantidadeDeReceitas(mesAnoDTO.getAno(), mesAnoDTO.getMes(), id);
+
+	}
 
 	public Date buscarDataMaisRecenteDaReceita(Integer id) {
 
@@ -54,15 +50,6 @@ public class ReceitaService {
 
 	}
 
-	public Integer quantidadeDeReceitasMensal(Integer id, Date data) {
-
-		MesAnoDTO mesAnoDTO = datas.retornarAnoEMes(data);
-
-		return receitaRepository.quantidadeDeReceitas(mesAnoDTO.getAno(), mesAnoDTO.getMes(), id);
-
-	}
-
-	// BUSCAR TODAS AS RECEITAS DE EM UM MES/ANO DE ACORDO COM O ID DO USUARIO
 	public List<Receita> buscarTodasAsReceitasMesAno(Integer id, Date data, Integer pagina, Integer linhasPorPagina) {
 
 		PageRequest pageRequest = PageRequest.of(pagina, linhasPorPagina);
@@ -79,7 +66,6 @@ public class ReceitaService {
 		}
 	}
 
-	// ADICIONAR NOVA RECEITA
 	public void adicionarReceita(ReceitaDTO receita, Integer idUsuario) {
 
 		receita.setId(null);
@@ -88,8 +74,6 @@ public class ReceitaService {
 
 		Receita novaReceita = new Receita(null, receita.getNomeReceita(), receita.getValorReceita(),
 				receita.getDataReceita(), usuario);
-
-		// novaReceita = (Receita) FormatarPalavras.caixaAltaClasse(novaReceita);
 
 		receitaRepository.saveAll(Arrays.asList(novaReceita));
 	}
@@ -104,6 +88,10 @@ public class ReceitaService {
 
 	}
 
+	public void deletarReceitaPorId(Integer id) {
+		receitaRepository.deleteById(id);
+	}
+	
 	public ResponseEntity<?> valorReceitaMesAnoPesquisado(Date data, Integer id) {
 
 		Double valorTotal = 0.0;
@@ -124,10 +112,6 @@ public class ReceitaService {
 		return ResponseEntity.ok(valorTotal);
 	}
 
-	// DELETAR RECEITA PELO ID
-	public void deletarReceitaPorId(Integer id) {
-		receitaRepository.deleteById(id);
-	}
 
 	// VALOR DA RECEITA NA DATA ATUAL
 //	public ResponseEntity<?> valorReceitaDataAtual(Integer id) {

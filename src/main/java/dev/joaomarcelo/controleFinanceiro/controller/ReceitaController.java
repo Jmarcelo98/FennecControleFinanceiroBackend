@@ -45,7 +45,6 @@ public class ReceitaController {
 		return ResponseEntity.ok(receitaService.buscarDataMaisRecenteDaReceita(idToken.pegarIdPeloToken()));
 	}
 
-	// PEGAR TODAS AS RECEITA DO USUARIO OU DE ALGUM MÊS/ANO ESPECIFICO
 	@GetMapping(path = "data/mensal-anual")
 	public ResponseEntity<List<ReceitaDTO>> buscarTodasReceitasOuDeAcordoComOMesAno(
 			@RequestParam(value = "data") Date data, @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
@@ -58,9 +57,8 @@ public class ReceitaController {
 		return ResponseEntity.ok().body(listDto);
 	}
 
-	// ADICIONAR NOVA RECEITA
 	@PostMapping
-	public void adicionarReceita(@RequestBody @Valid ReceitaDTO receita, String data) {
+	public void adicionarReceita(@RequestBody @Valid ReceitaDTO receita) {
 		receitaService.adicionarReceita(receita, idToken.pegarIdPeloToken());
 	}
 
@@ -69,7 +67,6 @@ public class ReceitaController {
 		receitaService.atualizarReceita(receita, idToken.pegarIdPeloToken());
 	}
 
-	// DELETAR RECEITA PELO ID
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<Void> deletarReceita(@PathVariable(value = "id") Integer id) {
 		receitaService.deletarReceitaPorId(id);

@@ -1,6 +1,6 @@
 package dev.joaomarcelo.controleFinanceiro.controller;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.joaomarcelo.controleFinanceiro.domain.Despesa;
@@ -34,23 +35,28 @@ public class DespesaController {
 	@Autowired
 	private JwtUtils idToken;
 
-	// PEGAR TODAS AS DESPESAS DO USUARIO OU DE ALGUM MÊS/ANO ESPECIFICO
-	@GetMapping(path = "/{ano}/{mes}")
+	@GetMapping(path = "/quantidade-mensal")
+	public ResponseEntity<Integer> quantidadeDeDespesasMensal(@RequestParam(value = "data") Date data) {
+		return ResponseEntity.ok(despesaService.quantidadeDeDespesasMensal(idToken.pegarIdPeloToken(), data));
+	}
+
+	@GetMapping(path = "/dataMaisRecente")
+	public ResponseEntity<Date> buscarDataMaisRecenteDaDespesa() {
+		return ResponseEntity.ok(despesaService.buscarDataMaisRecenteDaDespesa(idToken.pegarIdPeloToken()));
+	}
+
+	@GetMapping(path = "data/mensal-anual")
 	public ResponseEntity<List<DespesaDTO>> buscarTodasDespesasOuDeAcordoComOMesAno(
-			@PathVariable(value = "ano") Integer ano, @PathVariable(value = "mes") Integer mes) {
+			@RequestParam(value = "data") Date data, @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
+			@RequestParam(value = "linhasPorPagina", defaultValue = "5") Integer linhasPorPagina) {
 
-		List<Despesa> list = new ArrayList<>();
+		List<Despesa> list = despesaService.buscarTodasAsDespesasMesAno(idToken.pegarIdPeloToken(), data, pagina,
+				linhasPorPagina);
 
-		if (ano != null && mes != null) {
-			list = despesaService.buscarTodasAsDespesasMesAno(idToken.pegarIdPeloToken(), mes, ano);
-		} else {
-			list = despesaService.buscarTodasAsDespesas(idToken.pegarIdPeloToken());
-		}
 		List<DespesaDTO> listDto = list.stream().map(obj -> new DespesaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
 
-	// ADICIONAR NOVA DESPESA
 	@PostMapping
 	public void adicionarDespesa(@RequestBody @Valid DespesaDTO despesa) {
 		despesaService.adicionarDespesa(despesa, idToken.pegarIdPeloToken());
@@ -61,24 +67,24 @@ public class DespesaController {
 		despesaService.atualizarDespesa(despesa, idToken.pegarIdPeloToken());
 	}
 
-	// DELETAR DESPESA PELO ID
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<Void> deletarReceita(@PathVariable(value = "id") Integer id) {
 		despesaService.deletarDespesaPorId(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	@GetMapping(path = "valorDespesaMes/{ano}/{mes}")
-	public ResponseEntity<?> valorDespesaMesAnoPesquisado(@PathVariable(value = "ano") Integer ano,
-			@PathVariable(value = "mes") Integer mes) {
-		ResponseEntity<?> resultadoDespesa = despesaService.valorDespesaMesAnoPesquisado(ano, mes, idToken.pegarIdPeloToken());
-		return ResponseEntity.ok().body(resultadoDespesa).getBody();
-	}
 
-	@GetMapping(path = "valorDespesaMes")
-	public ResponseEntity<?> valorDespesaDataAtual() {
-		ResponseEntity<?> resultadoDespesa = despesaService.valorDespesaDataAtual(idToken.pegarIdPeloToken());
+	@GetMapping(path = "valor-total/mensal-anual")
+	public ResponseEntity<?> valorDespesaMesAnoPesquisado(@RequestParam(value = "data") Date data) {
+		ResponseEntity<?> resultadoDespesa = despesaService.valorDespesaMesAnoPesquisado(data,
+				idToken.pegarIdPeloToken());
 		return ResponseEntity.ok().body(resultadoDespesa).getBody();
 	}
+	
+//	@GetMapping(path = "valorDespesaMes")
+//	public ResponseEntity<?> valorDespesaDataAtual() {
+//		ResponseEntity<?> resultadoDespesa = despesaService.valorDespesaDataAtual(idToken.pegarIdPeloToken());
+//		return ResponseEntity.ok().body(resultadoDespesa).getBody();
+//	}
+
 
 }

@@ -3,9 +3,6 @@ package dev.joaomarcelo.controleFinanceiro.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import dev.joaomarcelo.controleFinanceiro.domain.Despesa;
 
 public class DespesaDTO implements Serializable {
@@ -17,7 +14,6 @@ public class DespesaDTO implements Serializable {
 
 	private Double valorDespesa;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataDespesa;
 
 	public DespesaDTO() {

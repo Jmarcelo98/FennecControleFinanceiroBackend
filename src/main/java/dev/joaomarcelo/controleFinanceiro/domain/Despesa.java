@@ -30,7 +30,7 @@ public class Despesa implements Serializable {
 	@NotBlank
 	private Double valorDespesa;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull
 	private Date dataDespesa;
 

@@ -9,6 +9,7 @@ public class MensagensPersonalizadas {
 	public static String RECEITA_EXCLUIDA_COM_SUCESSO = "Receita removida com sucesso!";
 
 //	DESPESA
+	public static String SEM_DESPESA_CADASTRADO = "Você não possui despesas cadastradas no sistema";
 	public static String SEM_DESPESA = "Você não possui despesas no mês pesquisado!";
 	public static String SEM_DESPESA_MES_ATUAL = "Você não possui despesas no mês atual!";
 
