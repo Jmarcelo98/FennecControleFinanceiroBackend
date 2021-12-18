@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.joaomarcelo.controleFinanceiro.domain.Receita;
+import dev.joaomarcelo.controleFinanceiro.dto.QuantidadeMensal;
 import dev.joaomarcelo.controleFinanceiro.dto.ReceitaDTO;
+import dev.joaomarcelo.controleFinanceiro.dto.QuantidadeEReceitaMensais;
 import dev.joaomarcelo.controleFinanceiro.security.jwt.JwtUtils;
 import dev.joaomarcelo.controleFinanceiro.service.ReceitaService;
 
@@ -35,10 +37,10 @@ public class ReceitaController {
 	@Autowired
 	private JwtUtils idToken;
 
-	@GetMapping(path = "/quantidade-mensal")
-	public ResponseEntity<Integer> quantidadeDeReceitasMensal(@RequestParam(value = "data") Date data) {
-		return ResponseEntity.ok(receitaService.quantidadeDeReceitasMensal(idToken.pegarIdPeloToken(), data));
-	}
+//	@GetMapping(path = "/quantidade-mensal")
+//	public ResponseEntity<Integer> quantidadeDeReceitasMensal(@RequestParam(value = "data") Date data) {
+//		return ResponseEntity.ok(receitaService.quantidadeDeReceitasMensal(idToken.pegarIdPeloToken(), data));
+//	}
 
 	@GetMapping(path = "/dataMaisRecente")
 	public ResponseEntity<Date> buscarDataMaisRecenteDaReceita() {
@@ -46,7 +48,7 @@ public class ReceitaController {
 	}
 
 	@GetMapping(path = "data/mensal-anual")
-	public ResponseEntity<List<ReceitaDTO>> buscarTodasReceitasOuDeAcordoComOMesAno(
+	public ResponseEntity<QuantidadeEReceitaMensais> buscarTodasReceitasOuDeAcordoComOMesAno(
 			@RequestParam(value = "data") Date data, @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
 			@RequestParam(value = "linhasPorPagina", defaultValue = "5") Integer linhasPorPagina) {
 
@@ -54,7 +56,13 @@ public class ReceitaController {
 				linhasPorPagina);
 
 		List<ReceitaDTO> listDto = list.stream().map(obj -> new ReceitaDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
+
+		QuantidadeMensal qtdReceita = new QuantidadeMensal(
+				receitaService.quantidadeDeReceitasMensal(idToken.pegarIdPeloToken(), data));
+
+		QuantidadeEReceitaMensais quantidadeEReceitaMensais = new QuantidadeEReceitaMensais(listDto, qtdReceita);
+
+		return ResponseEntity.ok().body(quantidadeEReceitaMensais);
 	}
 
 	@PostMapping

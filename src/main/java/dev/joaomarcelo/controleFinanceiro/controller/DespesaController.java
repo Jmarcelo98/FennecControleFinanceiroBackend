@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.joaomarcelo.controleFinanceiro.domain.Despesa;
 import dev.joaomarcelo.controleFinanceiro.dto.DespesaDTO;
+import dev.joaomarcelo.controleFinanceiro.dto.QuantidadeEDespesasMensais;
+import dev.joaomarcelo.controleFinanceiro.dto.QuantidadeMensal;
 import dev.joaomarcelo.controleFinanceiro.security.jwt.JwtUtils;
 import dev.joaomarcelo.controleFinanceiro.service.DespesaService;
 
@@ -35,10 +37,10 @@ public class DespesaController {
 	@Autowired
 	private JwtUtils idToken;
 
-	@GetMapping(path = "/quantidade-mensal")
-	public ResponseEntity<Integer> quantidadeDeDespesasMensal(@RequestParam(value = "data") Date data) {
-		return ResponseEntity.ok(despesaService.quantidadeDeDespesasMensal(idToken.pegarIdPeloToken(), data));
-	}
+//	@GetMapping(path = "/quantidade-mensal")
+//	public ResponseEntity<Integer> quantidadeDeDespesasMensal(@RequestParam(value = "data") Date data) {
+//		return ResponseEntity.ok(despesaService.quantidadeDeDespesasMensal(idToken.pegarIdPeloToken(), data));
+//	}
 
 	@GetMapping(path = "/dataMaisRecente")
 	public ResponseEntity<Date> buscarDataMaisRecenteDaDespesa() {
@@ -46,7 +48,7 @@ public class DespesaController {
 	}
 
 	@GetMapping(path = "data/mensal-anual")
-	public ResponseEntity<List<DespesaDTO>> buscarTodasDespesasOuDeAcordoComOMesAno(
+	public ResponseEntity<QuantidadeEDespesasMensais> buscarTodasDespesasOuDeAcordoComOMesAno(
 			@RequestParam(value = "data") Date data, @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
 			@RequestParam(value = "linhasPorPagina", defaultValue = "5") Integer linhasPorPagina) {
 
@@ -54,7 +56,14 @@ public class DespesaController {
 				linhasPorPagina);
 
 		List<DespesaDTO> listDto = list.stream().map(obj -> new DespesaDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
+
+		QuantidadeMensal qtd = new QuantidadeMensal(
+				despesaService.quantidadeDeDespesasMensal(idToken.pegarIdPeloToken(), data));
+
+		QuantidadeEDespesasMensais quantidadeEDespesasMensais = new QuantidadeEDespesasMensais(listDto, qtd);
+
+		return ResponseEntity.ok().body(quantidadeEDespesasMensais);
+
 	}
 
 	@PostMapping
@@ -79,12 +88,11 @@ public class DespesaController {
 				idToken.pegarIdPeloToken());
 		return ResponseEntity.ok().body(resultadoDespesa).getBody();
 	}
-	
+
 //	@GetMapping(path = "valorDespesaMes")
 //	public ResponseEntity<?> valorDespesaDataAtual() {
 //		ResponseEntity<?> resultadoDespesa = despesaService.valorDespesaDataAtual(idToken.pegarIdPeloToken());
 //		return ResponseEntity.ok().body(resultadoDespesa).getBody();
 //	}
-
 
 }
