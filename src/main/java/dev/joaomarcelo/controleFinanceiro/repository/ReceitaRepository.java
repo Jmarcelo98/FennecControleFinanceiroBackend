@@ -24,6 +24,10 @@ public interface ReceitaRepository extends JpaRepository<Receita, Integer> {
 	Date buscarDataMaisRecenteDaReceita(@Param("id") Integer id);
 
 	@Transactional(readOnly = true)
+	@Query(value = "SELECT obj.data_receita FROM Receita obj WHERE obj.usuario_id=?1 ORDER BY obj.data_receita ASC LIMIT 1", nativeQuery = true)
+	Date buscarDataMaisAntigaDaReceita(@Param("id") Integer id);
+
+	@Transactional(readOnly = true)
 	@Query(value = "SELECT * FROM Receita obj WHERE YEAR(obj.data_receita)=?1 AND MONTH(obj.data_receita)=?2 AND obj.usuario_id=?3 ORDER BY obj.data_receita desc, obj.valor_receita DESC, obj.nome_receita ASC ", nativeQuery = true)
 	List<Receita> findReceitaByIdUsuarioPeloMesEAno(@Param("ano") Integer ano, @Param("mes") Integer mes,
 			@Param("id") Integer id, Pageable pageRequest);

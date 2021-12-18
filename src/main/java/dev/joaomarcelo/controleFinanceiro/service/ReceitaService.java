@@ -50,6 +50,18 @@ public class ReceitaService {
 
 	}
 
+	public Date buscarDataMaisAntigaDaReceita(Integer id) {
+
+		Date dataReceitaMaisAntiga = receitaRepository.buscarDataMaisAntigaDaReceita(id);
+
+		if (dataReceitaMaisAntiga == null) {
+			throw new ObjetoNaoEncontrado(MensagensPersonalizadas.SEM_RECEITA_CADASTRADO);
+		}
+
+		return dataReceitaMaisAntiga;
+
+	}
+
 	public List<Receita> buscarTodasAsReceitasMesAno(Integer id, Date data, Integer pagina, Integer linhasPorPagina) {
 
 		PageRequest pageRequest = PageRequest.of(pagina, linhasPorPagina);
@@ -91,7 +103,7 @@ public class ReceitaService {
 	public void deletarReceitaPorId(Integer id) {
 		receitaRepository.deleteById(id);
 	}
-	
+
 	public ResponseEntity<?> valorReceitaMesAnoPesquisado(Date data, Integer id) {
 
 		Double valorTotal = 0.0;
@@ -111,7 +123,6 @@ public class ReceitaService {
 
 		return ResponseEntity.ok(valorTotal);
 	}
-
 
 	// VALOR DA RECEITA NA DATA ATUAL
 //	public ResponseEntity<?> valorReceitaDataAtual(Integer id) {

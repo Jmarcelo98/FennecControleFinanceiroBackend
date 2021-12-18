@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.joaomarcelo.controleFinanceiro.domain.Despesa;
+import dev.joaomarcelo.controleFinanceiro.dto.ControleDeDatasDTO;
 import dev.joaomarcelo.controleFinanceiro.dto.DespesaDTO;
 import dev.joaomarcelo.controleFinanceiro.dto.QuantidadeEDespesasMensais;
 import dev.joaomarcelo.controleFinanceiro.dto.QuantidadeMensal;
@@ -43,8 +44,13 @@ public class DespesaController {
 //	}
 
 	@GetMapping(path = "/dataMaisRecente")
-	public ResponseEntity<Date> buscarDataMaisRecenteDaDespesa() {
-		return ResponseEntity.ok(despesaService.buscarDataMaisRecenteDaDespesa(idToken.pegarIdPeloToken()));
+	public ResponseEntity<ControleDeDatasDTO> buscarDataMaisRecenteDaDespesa() {
+		ControleDeDatasDTO controleDeDatasDTO = new ControleDeDatasDTO(
+				despesaService.buscarDataMaisRecenteDaDespesa(idToken.pegarIdPeloToken()),
+				despesaService.buscarDataMaisAntigaDaDespesa(idToken.pegarIdPeloToken()));
+
+		return ResponseEntity.ok().body(controleDeDatasDTO);
+//		return ResponseEntity.ok(despesaService.buscarDataMaisRecenteDaDespesa(idToken.pegarIdPeloToken()));
 	}
 
 	@GetMapping(path = "data/mensal-anual")

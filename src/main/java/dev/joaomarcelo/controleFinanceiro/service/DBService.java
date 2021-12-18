@@ -136,7 +136,7 @@ public class DBService {
 
 		// RECEITA
 
-		Receita receita1 = new Receita(null, "Investimento", 400.20, cal.getTime(), usuario1);
+		Receita receita1 = new Receita(null, "Investimento", 400.20, cal6.getTime(), usuario1);
 		Receita receita2 = new Receita(null, "Presente de aniversário", 200.0, cal3.getTime(), usuario1);
 		Receita receita3 = new Receita(null, "Freelancer", 2200.0, cal5.getTime(), usuario1);
 		Receita receita4 = new Receita(null, "Bônus", 1200.0, new Date(), usuario1);

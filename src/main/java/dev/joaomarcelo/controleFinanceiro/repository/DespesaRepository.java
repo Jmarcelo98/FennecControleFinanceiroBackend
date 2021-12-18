@@ -23,6 +23,10 @@ public interface DespesaRepository extends JpaRepository<Despesa, Integer> {
 	@Transactional(readOnly = true)
 	@Query(value = "SELECT obj.data_despesa FROM Despesa obj WHERE obj.usuario_id=?1 ORDER BY obj.data_despesa DESC LIMIT 1", nativeQuery = true)
 	Date buscarDataMaisRecenteDaDespesa(@Param("id") Integer id);
+	
+	@Transactional(readOnly = true)
+	@Query(value = "SELECT obj.data_despesa FROM Despesa obj WHERE obj.usuario_id=?1 ORDER BY obj.data_despesa ASC LIMIT 1", nativeQuery = true)
+	Date buscarDataMaisAntigaDaDespesa(@Param("id") Integer id);
 
 	@Transactional(readOnly = true)
 	@Query(value = "SELECT * FROM Despesa obj WHERE YEAR(obj.data_despesa)=?1 AND MONTH(obj.data_despesa)=?2 AND obj.usuario_id=?3 ORDER BY data_despesa desc ", nativeQuery = true)

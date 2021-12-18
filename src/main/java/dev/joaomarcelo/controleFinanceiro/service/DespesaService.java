@@ -51,14 +51,25 @@ public class DespesaService {
 
 	}
 
+	public Date buscarDataMaisAntigaDaDespesa(Integer id) {
+
+		Date dataDespesaMaisAntiga = despesaRepository.buscarDataMaisAntigaDaDespesa(id);
+
+		if (dataDespesaMaisAntiga == null) {
+			throw new ObjetoNaoEncontrado(MensagensPersonalizadas.SEM_DESPESA_CADASTRADO);
+		}
+		return dataDespesaMaisAntiga;
+
+	}
+
 	public List<Despesa> buscarTodasAsDespesasMesAno(Integer id, Date data, Integer pagina, Integer linhasPorPagina) {
 
 		PageRequest pageRequest = PageRequest.of(pagina, linhasPorPagina);
 
 		MesAnoDTO mesAnoDTO = datas.retornarAnoEMes(data);
 
-		List<Despesa> listaDespesa = despesaRepository.findDespesaByIdUsuarioPeloMesEAno(mesAnoDTO.getAno(), mesAnoDTO.getMes(), id,
-				pageRequest);
+		List<Despesa> listaDespesa = despesaRepository.findDespesaByIdUsuarioPeloMesEAno(mesAnoDTO.getAno(),
+				mesAnoDTO.getMes(), id, pageRequest);
 
 		if (listaDespesa.size() == 0) {
 			throw new ObjetoNaoEncontrado(MensagensPersonalizadas.SEM_DESPESA);
@@ -76,7 +87,7 @@ public class DespesaService {
 
 		despesaRepository.saveAll(Arrays.asList(novaDespesa));
 	}
-	
+
 	public void atualizarDespesa(DespesaDTO despesa, Integer idUsuario) {
 		Usuario usuario = usuarioService.buscarPeloId(idUsuario);
 
@@ -86,11 +97,11 @@ public class DespesaService {
 		despesaRepository.save(atualizarDespesa);
 
 	}
-	
+
 	public void deletarDespesaPorId(Integer id) {
 		despesaRepository.deleteById(id);
 	}
-	
+
 	public ResponseEntity<?> valorDespesaMesAnoPesquisado(Date data, Integer id) {
 
 		Double valorTotal = 0.0;
@@ -122,7 +133,6 @@ public class DespesaService {
 			return listaDespesas.get();
 		}
 	}
-
 
 //	public ResponseEntity<?> valorDespesaDataAtual(Integer id) {
 //
