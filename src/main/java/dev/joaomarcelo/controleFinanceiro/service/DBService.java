@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 
 import dev.joaomarcelo.controleFinanceiro.domain.Despesa;
 import dev.joaomarcelo.controleFinanceiro.domain.Receita;
+import dev.joaomarcelo.controleFinanceiro.domain.TipoReceita;
 import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
 import dev.joaomarcelo.controleFinanceiro.repository.DespesaRepository;
 import dev.joaomarcelo.controleFinanceiro.repository.ReceitaRepository;
+import dev.joaomarcelo.controleFinanceiro.repository.TipoReceitaRepository;
 import dev.joaomarcelo.controleFinanceiro.repository.UsuarioRepository;
 
 @Service
@@ -27,6 +29,9 @@ public class DBService {
 
 	@Autowired
 	private DespesaRepository despesaRepository;
+
+	@Autowired
+	private TipoReceitaRepository tipoReceitaRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder codificador;
@@ -57,7 +62,6 @@ public class DBService {
 	private Calendar cal24 = Calendar.getInstance();
 	private Calendar cal25 = Calendar.getInstance();
 	private Calendar cal26 = Calendar.getInstance();
-	
 
 	public void instaciarTesteBancoDeDados() {
 
@@ -90,9 +94,8 @@ public class DBService {
 		cal24.set(2021, 11, 2, 0, 0, 1);
 		cal25.set(2021, 11, 8, 0, 0, 1);
 		cal26.set(2021, 11, 9, 0, 0, 1);
-		
+
 		cal21.set(2020, 12, 10, 0, 0, 1);
-		
 
 		// USUARIO
 		Usuario usuario1 = new Usuario("João", "Marcelo", "JOAOMARCELO588@GMAIL.COM", codificador.encode("123456"),
@@ -103,6 +106,14 @@ public class DBService {
 		Usuario usuario3 = new Usuario("Teste", "Teste2", "TESTE@GMAIL.COM", codificador.encode("123456"), null);
 
 		usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2, usuario3));
+
+		// TIPO RECEITA
+
+//		TipoReceita tipoReceita1 = new TipoReceita(null, "Salário", usuario1);
+//		TipoReceita tipoReceita2 = new TipoReceita(null, "Premiações/Bonificações", usuario1);
+//		TipoReceita tipoReceita3 = new TipoReceita(null, "Devedores", usuario1);
+//
+//		tipoReceitaRepository.saveAll(Arrays.asList(tipoReceita1, tipoReceita2, tipoReceita3));
 
 		// DESPESA
 
@@ -163,7 +174,7 @@ public class DBService {
 		Receita receita28 = new Receita(null, "Lavagem de carro", 20.0, cal25.getTime(), usuario1);
 		Receita receita29 = new Receita(null, "Recebido da Tauany", 254.23, cal26.getTime(), usuario1);
 		Receita receita32 = new Receita(null, "Décimo terceiro", 800.0, new Date(), usuario1);
-		
+
 		Receita receita7 = new Receita(null, "Salário", 6500.00, cal7.getTime(), usuario2);
 		Receita receita8 = new Receita(null, "Venda do alimentação", 650.0, cal4.getTime(), usuario2);
 		Receita receita9 = new Receita(null, "Bônus do plantão", 260.0, cal6.getTime(), usuario2);

@@ -50,6 +50,10 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	private List<Receita> receita = new ArrayList<>();
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	private List<TipoReceita> tipoReceita = new ArrayList<>();
+
 	public Usuario() {
 
 	}
