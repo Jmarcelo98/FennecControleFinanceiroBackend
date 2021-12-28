@@ -28,5 +28,4 @@ public class QuantidadeEReceitaMensais {
 	public void setQtd(QuantidadeMensal qtd) {
 		this.qtd = qtd;
 	}
-
 }

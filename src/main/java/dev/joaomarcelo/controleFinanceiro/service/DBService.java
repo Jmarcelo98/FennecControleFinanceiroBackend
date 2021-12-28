@@ -109,11 +109,16 @@ public class DBService {
 
 		// TIPO RECEITA
 
-//		TipoReceita tipoReceita1 = new TipoReceita(null, "Salário", usuario1);
-//		TipoReceita tipoReceita2 = new TipoReceita(null, "Premiações/Bonificações", usuario1);
-//		TipoReceita tipoReceita3 = new TipoReceita(null, "Devedores", usuario1);
-//
-//		tipoReceitaRepository.saveAll(Arrays.asList(tipoReceita1, tipoReceita2, tipoReceita3));
+		TipoReceita tipoReceita1 = new TipoReceita(null, "Salário", usuario1);
+		TipoReceita tipoReceita2 = new TipoReceita(null, "Premiações/Bonificações", usuario1);
+		TipoReceita tipoReceita3 = new TipoReceita(null, "Devedores", usuario1);
+		TipoReceita tipoReceita4 = new TipoReceita(null, "Investimentos", usuario1);
+		TipoReceita tipoReceita5 = new TipoReceita(null, "Vendas", usuario1);
+
+		TipoReceita tipoReceita6 = new TipoReceita(null, "Salário", usuario2);
+		TipoReceita tipoReceita7 = new TipoReceita(null, "Vendendo", usuario2);
+		tipoReceitaRepository.saveAll(Arrays.asList(tipoReceita1, tipoReceita2, tipoReceita3, tipoReceita4,
+				tipoReceita5, tipoReceita6, tipoReceita7));
 
 		// DESPESA
 
@@ -147,39 +152,42 @@ public class DBService {
 
 		// RECEITA
 
-		Receita receita1 = new Receita(null, "Investimento", 400.20, cal6.getTime(), usuario1);
-		Receita receita2 = new Receita(null, "Presente de aniversário", 200.0, cal3.getTime(), usuario1);
-		Receita receita3 = new Receita(null, "Freelancer", 2200.0, cal5.getTime(), usuario1);
-		Receita receita4 = new Receita(null, "Bônus", 1200.0, new Date(), usuario1);
-		Receita receita5 = new Receita(null, "Beneficios", 2200.0, new Date(), usuario1);
-		Receita receita6 = new Receita(null, "IR", 2800.0, cal3.getTime(), usuario1);
-		Receita receita12 = new Receita(null, "Lavar carro", 30.0, cal3.getTime(), usuario1);
-		Receita receita13 = new Receita(null, "Venda de monitor", 800.0, cal3.getTime(), usuario1);
-		Receita receita14 = new Receita(null, "Venda do Computador", 5800.0, cal10.getTime(), usuario1);
-		Receita receita15 = new Receita(null, "Venda na OLX", 350.0, cal11.getTime(), usuario1);
-		Receita receita16 = new Receita(null, "Freelancer", 1800.0, cal12.getTime(), usuario1);
-		Receita receita17 = new Receita(null, "Bonificação", 800.0, cal13.getTime(), usuario1);
-		Receita receita18 = new Receita(null, "Décimo terceiro", 2850.0, cal14.getTime(), usuario1);
-		Receita receita19 = new Receita(null, "Venda de cadeira", 760.0, cal15.getTime(), usuario1);
-		Receita receita24 = new Receita(null, "Venda de teclado antigo", 270.0, cal15.getTime(), usuario1);
-		Receita receita25 = new Receita(null, "Venda do copo Stanley", 200.0, cal15.getTime(), usuario1);
-		Receita receita20 = new Receita(null, "Venda de monitor secundário", 1300.0, cal16.getTime(), usuario1);
-		Receita receita21 = new Receita(null, "Venda de controle", 140.0, cal18.getTime(), usuario1);
-		Receita receita22 = new Receita(null, "Cashback", 325.0, cal19.getTime(), usuario1);
-		Receita receita23 = new Receita(null, "Venda de Teclado Redragon", 2310.0, cal20.getTime(), usuario1);
-		Receita receita31 = new Receita(null, "Freelancer", 2200.0, cal21.getTime(), usuario1);
-		Receita receita30 = new Receita(null, "CSGORoll", 300.0, cal21.getTime(), usuario1);
-		Receita receita26 = new Receita(null, "VAMOS GG", 1500.0, cal23.getTime(), usuario1);
-		Receita receita27 = new Receita(null, "Refeição vendido", 200.0, cal24.getTime(), usuario1);
-		Receita receita28 = new Receita(null, "Lavagem de carro", 20.0, cal25.getTime(), usuario1);
-		Receita receita29 = new Receita(null, "Recebido da Tauany", 254.23, cal26.getTime(), usuario1);
-		Receita receita32 = new Receita(null, "Décimo terceiro", 800.0, new Date(), usuario1);
+		Receita receita1 = new Receita(null, "Investimento", 400.20, cal6.getTime(), usuario1, tipoReceita4);
+		Receita receita2 = new Receita(null, "Presente de aniversário", 200.0, cal3.getTime(), usuario1, tipoReceita2);
+		Receita receita3 = new Receita(null, "Freelancer", 2200.0, cal5.getTime(), usuario1, tipoReceita2);
+		Receita receita4 = new Receita(null, "Bônus", 1200.0, new Date(), usuario1, tipoReceita2);
+		Receita receita5 = new Receita(null, "Beneficios", 2200.0, new Date(), usuario1, tipoReceita2);
+		Receita receita6 = new Receita(null, "IR", 2800.0, cal3.getTime(), usuario1, tipoReceita2);
+		Receita receita12 = new Receita(null, "Lavar carro", 30.0, cal3.getTime(), usuario1, tipoReceita2);
+		Receita receita13 = new Receita(null, "Venda de monitor", 800.0, cal3.getTime(), usuario1, tipoReceita5);
+		Receita receita14 = new Receita(null, "Venda do Computador", 5800.0, cal10.getTime(), usuario1, tipoReceita5);
+		Receita receita15 = new Receita(null, "Venda na OLX", 350.0, cal11.getTime(), usuario1, tipoReceita5);
+		Receita receita16 = new Receita(null, "Freelancer", 1800.0, cal12.getTime(), usuario1, tipoReceita2);
+		Receita receita17 = new Receita(null, "Bonificação", 800.0, cal13.getTime(), usuario1, tipoReceita2);
+		Receita receita18 = new Receita(null, "Décimo terceiro", 2850.0, cal14.getTime(), usuario1, tipoReceita1);
+		Receita receita19 = new Receita(null, "Venda de cadeira", 760.0, cal15.getTime(), usuario1, tipoReceita5);
+		Receita receita24 = new Receita(null, "Venda de teclado antigo", 270.0, cal15.getTime(), usuario1,
+				tipoReceita5);
+		Receita receita25 = new Receita(null, "Venda do copo Stanley", 200.0, cal15.getTime(), usuario1, tipoReceita5);
+		Receita receita20 = new Receita(null, "Venda de monitor secundário", 1300.0, cal16.getTime(), usuario1,
+				tipoReceita5);
+		Receita receita21 = new Receita(null, "Venda de controle", 140.0, cal18.getTime(), usuario1, tipoReceita5);
+		Receita receita22 = new Receita(null, "Cashback", 325.0, cal19.getTime(), usuario1, tipoReceita2);
+		Receita receita23 = new Receita(null, "Venda de Teclado Redragon", 2310.0, cal20.getTime(), usuario1,
+				tipoReceita5);
+		Receita receita31 = new Receita(null, "Freelancer", 2200.0, cal21.getTime(), usuario1, tipoReceita2);
+		Receita receita30 = new Receita(null, "CSGORoll", 300.0, cal21.getTime(), usuario1, tipoReceita4);
+		Receita receita26 = new Receita(null, "VAMOS GG", 1500.0, cal23.getTime(), usuario1, tipoReceita4);
+		Receita receita27 = new Receita(null, "Refeição vendido", 200.0, cal24.getTime(), usuario1, tipoReceita5);
+		Receita receita28 = new Receita(null, "Lavagem de carro", 20.0, cal25.getTime(), usuario1, tipoReceita2);
+		Receita receita29 = new Receita(null, "Recebido da Tauany", 254.23, cal26.getTime(), usuario1, tipoReceita3);
+		Receita receita32 = new Receita(null, "Décimo terceiro", 800.0, new Date(), usuario1, tipoReceita1);
 
-		Receita receita7 = new Receita(null, "Salário", 6500.00, cal7.getTime(), usuario2);
-		Receita receita8 = new Receita(null, "Venda do alimentação", 650.0, cal4.getTime(), usuario2);
-		Receita receita9 = new Receita(null, "Bônus do plantão", 260.0, cal6.getTime(), usuario2);
-		Receita receita10 = new Receita(null, "Teste1", 460.0, cal7.getTime(), usuario2);
-		Receita receita11 = new Receita(null, "Teste 2", 1460.0, cal19.getTime(), usuario2);
+		Receita receita7 = new Receita(null, "Salário", 6500.00, cal7.getTime(), usuario2, tipoReceita6);
+		Receita receita8 = new Receita(null, "Venda do alimentação", 650.0, cal4.getTime(), usuario2, tipoReceita7);
+		Receita receita9 = new Receita(null, "Bônus do plantão", 260.0, cal6.getTime(), usuario2, tipoReceita7);
+		Receita receita10 = new Receita(null, "Teste1", 460.0, cal7.getTime(), usuario2, tipoReceita7);
+		Receita receita11 = new Receita(null, "Teste 2", 1460.0, cal19.getTime(), usuario2, tipoReceita6);
 
 		receitaRepository.saveAll(Arrays.asList(receita1, receita2, receita3, receita4, receita5, receita6, receita7,
 				receita8, receita9, receita10, receita11, receita12, receita13, receita14, receita15, receita16,

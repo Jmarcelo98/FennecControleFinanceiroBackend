@@ -16,6 +16,8 @@ public class ReceitaDTO implements Serializable {
 
 	private Date dataReceita;
 
+	private TipoReceitaDTO tipoReceitaDTO;
+
 	public ReceitaDTO() {
 	}
 
@@ -24,6 +26,7 @@ public class ReceitaDTO implements Serializable {
 		nomeReceita = obj.getNomeReceita();
 		valorReceita = obj.getValorReceita();
 		dataReceita = obj.getDataReceita();
+		tipoReceitaDTO = new TipoReceitaDTO(obj.getTipoReceita().getId(), obj.getTipoReceita().getDescrição());
 	}
 
 	public Integer getId() {
@@ -56,6 +59,14 @@ public class ReceitaDTO implements Serializable {
 
 	public void setDataReceita(Date dataReceita) {
 		this.dataReceita = dataReceita;
+	}
+
+	public TipoReceitaDTO getTipoReceitaDTO() {
+		return tipoReceitaDTO;
+	}
+
+	public void setTipoReceitaDTO(TipoReceitaDTO tipoReceitaDTO) {
+		this.tipoReceitaDTO = tipoReceitaDTO;
 	}
 
 }

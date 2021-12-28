@@ -2,23 +2,17 @@ package dev.joaomarcelo.controleFinanceiro.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 @Entity
 public class Receita implements Serializable {
@@ -43,7 +37,7 @@ public class Receita implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "tipo_receita_id")
 	private TipoReceita tipoReceita;
@@ -51,13 +45,15 @@ public class Receita implements Serializable {
 	public Receita() {
 	}
 
-	public Receita(Integer id, String nomeReceita, Double valorReceita, Date dataReceita, Usuario usuario) {
+	public Receita(Integer id, String nomeReceita, Double valorReceita, Date dataReceita, Usuario usuario,
+			TipoReceita tipoReceita) {
 		super();
 		this.id = id;
 		this.nomeReceita = nomeReceita;
 		this.valorReceita = valorReceita;
 		this.dataReceita = dataReceita;
 		this.usuario = usuario;
+		this.tipoReceita = tipoReceita;
 	}
 
 	public Integer getId() {
@@ -98,6 +94,14 @@ public class Receita implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public TipoReceita getTipoReceita() {
+		return tipoReceita;
+	}
+
+	public void setTipoReceita(TipoReceita tipoReceita) {
+		this.tipoReceita = tipoReceita;
 	}
 
 }

@@ -85,7 +85,7 @@ public class ReceitaService {
 		Usuario usuario = usuarioService.buscarPeloId(idUsuario);
 
 		Receita novaReceita = new Receita(null, receita.getNomeReceita(), receita.getValorReceita(),
-				receita.getDataReceita(), usuario);
+				receita.getDataReceita(), usuario, null);
 
 		receitaRepository.saveAll(Arrays.asList(novaReceita));
 	}
@@ -94,7 +94,7 @@ public class ReceitaService {
 		Usuario usuario = usuarioService.buscarPeloId(idUsuario);
 
 		Receita atualizarReceita = new Receita(receita.getId(), receita.getNomeReceita(), receita.getValorReceita(),
-				receita.getDataReceita(), usuario);
+				receita.getDataReceita(), usuario, null);
 
 		receitaRepository.save(atualizarReceita);
 

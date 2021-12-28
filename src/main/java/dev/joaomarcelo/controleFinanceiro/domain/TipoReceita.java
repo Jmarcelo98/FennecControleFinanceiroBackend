@@ -25,7 +25,7 @@ public class TipoReceita {
 
 	@NotNull
 	@NotBlank
-	private String descrição;
+	private String descricao;
 
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
@@ -36,11 +36,15 @@ public class TipoReceita {
 	private List<Receita> receita = new ArrayList<>();
 //	private Receita receita;
 
-	public TipoReceita(Integer id, String descrição, Usuario usuario) {
+	public TipoReceita(Integer id, String descricao, Usuario usuario) {
 		super();
 		this.id = id;
-		this.descrição = descrição;
+		this.descricao = descricao;
 		this.usuario = usuario;
+	}
+
+	public TipoReceita() {
+
 	}
 
 	public Integer getId() {
@@ -52,11 +56,11 @@ public class TipoReceita {
 	}
 
 	public String getDescrição() {
-		return descrição;
+		return descricao;
 	}
 
-	public void setDescrição(String descrição) {
-		this.descrição = descrição;
+	public void setDescrição(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Usuario getUsuario() {
