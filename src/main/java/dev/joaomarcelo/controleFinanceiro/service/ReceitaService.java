@@ -1,6 +1,5 @@
 package dev.joaomarcelo.controleFinanceiro.service;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +27,6 @@ public class ReceitaService {
 
 	@Autowired
 	private ReceitaRepository receitaRepository;
-
 
 	private Datas datas = new Datas();
 
@@ -87,9 +85,10 @@ public class ReceitaService {
 		Usuario usuario = usuarioService.buscarPeloId(idUsuario);
 
 		Receita novaReceita = new Receita(null, receita.getNomeReceita(), receita.getValorReceita(),
-				receita.getDataReceita(), usuario, null);
+				receita.getDataReceita(), usuario, new TipoReceita(receita.getTipoReceitaDTO().getId(),
+						receita.getTipoReceitaDTO().getDescricao(), usuario));
 
-		receitaRepository.saveAll(Arrays.asList(novaReceita));
+		receitaRepository.save(novaReceita);
 	}
 
 	public void atualizarReceita(ReceitaDTO receita, Integer idUsuario) {
