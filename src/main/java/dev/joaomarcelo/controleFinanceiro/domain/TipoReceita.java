@@ -55,7 +55,7 @@ public class TipoReceita {
 		this.id = id;
 	}
 
-	public String getDescrição() {
+	public String getDescricao() {
 		return descricao;
 	}
 

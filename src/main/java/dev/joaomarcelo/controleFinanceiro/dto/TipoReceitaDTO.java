@@ -16,7 +16,7 @@ public class TipoReceitaDTO {
 
 	public TipoReceitaDTO(TipoReceita obj) {
 		id = obj.getId();
-		descricao = obj.getDescrição();
+		descricao = obj.getDescricao();
 	}
 
 	public Integer getId() {

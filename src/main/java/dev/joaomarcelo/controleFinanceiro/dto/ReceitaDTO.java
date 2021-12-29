@@ -26,7 +26,7 @@ public class ReceitaDTO implements Serializable {
 		nomeReceita = obj.getNomeReceita();
 		valorReceita = obj.getValorReceita();
 		dataReceita = obj.getDataReceita();
-		tipoReceitaDTO = new TipoReceitaDTO(obj.getTipoReceita().getId(), obj.getTipoReceita().getDescrição());
+		tipoReceitaDTO = new TipoReceitaDTO(obj.getTipoReceita().getId(), obj.getTipoReceita().getDescricao());
 	}
 
 	public Integer getId() {

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import dev.joaomarcelo.controleFinanceiro.domain.Receita;
+import dev.joaomarcelo.controleFinanceiro.domain.TipoReceita;
 import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
 import dev.joaomarcelo.controleFinanceiro.dto.MesAnoDTO;
 import dev.joaomarcelo.controleFinanceiro.dto.ReceitaDTO;
@@ -27,6 +28,7 @@ public class ReceitaService {
 
 	@Autowired
 	private ReceitaRepository receitaRepository;
+
 
 	private Datas datas = new Datas();
 
@@ -91,12 +93,16 @@ public class ReceitaService {
 	}
 
 	public void atualizarReceita(ReceitaDTO receita, Integer idUsuario) {
+
 		Usuario usuario = usuarioService.buscarPeloId(idUsuario);
 
-		Receita atualizarReceita = new Receita(receita.getId(), receita.getNomeReceita(), receita.getValorReceita(),
-				receita.getDataReceita(), usuario, null);
+//		Receita atualizarReceita = new Receita(receita.getId(), receita.getNomeReceita(), receita.getValorReceita(),
+//				receita.getDataReceita(), usuario, new TipoReceita(receita.getTipoReceitaDTO().getId(),
+//						receita.getTipoReceitaDTO().getDescricao(), usuario));
 
-		receitaRepository.save(atualizarReceita);
+		receitaRepository.save(new Receita(receita.getId(), receita.getNomeReceita(), receita.getValorReceita(),
+				receita.getDataReceita(), usuario, new TipoReceita(receita.getTipoReceitaDTO().getId(),
+						receita.getTipoReceitaDTO().getDescricao(), usuario)));
 
 	}
 
