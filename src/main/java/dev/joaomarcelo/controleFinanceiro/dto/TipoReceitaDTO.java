@@ -1,5 +1,7 @@
 package dev.joaomarcelo.controleFinanceiro.dto;
 
+import dev.joaomarcelo.controleFinanceiro.domain.TipoReceita;
+
 public class TipoReceitaDTO {
 
 	private Integer id;
@@ -10,6 +12,11 @@ public class TipoReceitaDTO {
 		super();
 		this.id = id;
 		this.descricao = descricao;
+	}
+
+	public TipoReceitaDTO(TipoReceita obj) {
+		id = obj.getId();
+		descricao = obj.getDescrição();
 	}
 
 	public Integer getId() {
