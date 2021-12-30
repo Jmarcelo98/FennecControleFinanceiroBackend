@@ -11,10 +11,12 @@ import org.springframework.stereotype.Service;
 
 import dev.joaomarcelo.controleFinanceiro.domain.Despesa;
 import dev.joaomarcelo.controleFinanceiro.domain.Receita;
+import dev.joaomarcelo.controleFinanceiro.domain.TipoDespesa;
 import dev.joaomarcelo.controleFinanceiro.domain.TipoReceita;
 import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
 import dev.joaomarcelo.controleFinanceiro.repository.DespesaRepository;
 import dev.joaomarcelo.controleFinanceiro.repository.ReceitaRepository;
+import dev.joaomarcelo.controleFinanceiro.repository.TipoDespesaRepository;
 import dev.joaomarcelo.controleFinanceiro.repository.TipoReceitaRepository;
 import dev.joaomarcelo.controleFinanceiro.repository.UsuarioRepository;
 
@@ -32,6 +34,9 @@ public class DBService {
 
 	@Autowired
 	private TipoReceitaRepository tipoReceitaRepository;
+
+	@Autowired
+	private TipoDespesaRepository tipoDespesaRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder codificador;
@@ -120,35 +125,48 @@ public class DBService {
 		tipoReceitaRepository.saveAll(Arrays.asList(tipoReceita1, tipoReceita2, tipoReceita3, tipoReceita4,
 				tipoReceita5, tipoReceita6, tipoReceita7));
 
+//		TIPO DESPESA
+		TipoDespesa tipoDespesa1 = new TipoDespesa(null, "Lazer", usuario1);
+		TipoDespesa tipoDespesa2 = new TipoDespesa(null, "Jogos", usuario1);
+		TipoDespesa tipoDespesa3 = new TipoDespesa(null, "Tecnologia", usuario1);
+		TipoDespesa tipoDespesa4 = new TipoDespesa(null, "Alimentação", usuario1);
+		TipoDespesa tipoDespesa5 = new TipoDespesa(null, "Planos", usuario1);
+		TipoDespesa tipoDespesa6 = new TipoDespesa(null, "Outros", usuario1);
+		TipoDespesa tipoDespesa7 = new TipoDespesa(null, "Joguinhos", usuario2);
+		TipoDespesa tipoDespesa8 = new TipoDespesa(null, "Estudos", usuario2);
+		tipoDespesaRepository.saveAll(Arrays.asList(tipoDespesa1, tipoDespesa2, tipoDespesa3, tipoDespesa4,
+				tipoDespesa5, tipoDespesa6, tipoDespesa7, tipoDespesa8));
+
 		// DESPESA
 
-		Despesa despesa1 = new Despesa(null, "Jogos", 240.50, cal.getTime(), usuario1);
-		Despesa despesa2 = new Despesa(null, "McDonald's", 50.50, cal3.getTime(), usuario1);
-		Despesa despesa3 = new Despesa(null, "Teste", 30.50, cal3.getTime(), usuario1);
-		Despesa despesa4 = new Despesa(null, "Placa de vídeo", 3000.0, cal5.getTime(), usuario1);
-		Despesa despesa5 = new Despesa(null, "Placa solar", 8000.0, new Date(), usuario1);
-		Despesa despesa6 = new Despesa(null, "Fonte", 300.0, new Date(), usuario1);
-		Despesa despesa7 = new Despesa(null, "Ram", 100.0, new Date(), usuario1);
-		Despesa despesa13 = new Despesa(null, "Monitor", 1600.0, cal11.getTime(), usuario1);
-		Despesa despesa14 = new Despesa(null, "Copo", 200.0, cal13.getTime(), usuario1);
-		Despesa despesa15 = new Despesa(null, "Fio do controle", 370.0, cal15.getTime(), usuario1);
-		Despesa despesa16 = new Despesa(null, "Cabo do monitor", 400.0, cal20.getTime(), usuario1);
-		Despesa despesa17 = new Despesa(null, "Memória Ram", 630.0, cal17.getTime(), usuario1);
-		Despesa despesa18 = new Despesa(null, "Cadeira gamer", 3800.0, cal21.getTime(), usuario1);
-		Despesa despesa19 = new Despesa(null, "Shows", 500.0, cal12.getTime(), usuario1);
-		Despesa despesa20 = new Despesa(null, "Bebidas", 1000.0, cal14.getTime(), usuario1);
-		Despesa despesa21 = new Despesa(null, "Comidas", 250.0, cal16.getTime(), usuario1);
-		Despesa despesa22 = new Despesa(null, "Presente", 1000.0, cal18.getTime(), usuario1);
+		Despesa despesa1 = new Despesa(null, "Jogos", 240.50, cal.getTime(), usuario1, tipoDespesa1);
+		Despesa despesa2 = new Despesa(null, "McDonald's", 50.50, cal3.getTime(), usuario1, tipoDespesa2);
+		Despesa despesa3 = new Despesa(null, "Teste", 30.50, cal3.getTime(), usuario1, tipoDespesa8);
+		Despesa despesa4 = new Despesa(null, "Placa de vídeo", 3000.0, cal5.getTime(), usuario1, tipoDespesa3);
+		Despesa despesa5 = new Despesa(null, "Placa solar", 8000.0, new Date(), usuario1, tipoDespesa1);
+		Despesa despesa6 = new Despesa(null, "Fonte", 300.0, new Date(), usuario1, tipoDespesa3);
+		Despesa despesa7 = new Despesa(null, "Ram", 100.0, new Date(), usuario1, tipoDespesa3);
+		Despesa despesa13 = new Despesa(null, "Monitor", 1600.0, cal11.getTime(), usuario1, tipoDespesa3);
+		Despesa despesa14 = new Despesa(null, "Copo", 200.0, cal13.getTime(), usuario1, tipoDespesa1);
+		Despesa despesa15 = new Despesa(null, "Fio do controle", 370.0, cal15.getTime(), usuario1, tipoDespesa3);
+		Despesa despesa16 = new Despesa(null, "Cabo do monitor", 400.0, cal20.getTime(), usuario1, tipoDespesa3);
+		Despesa despesa17 = new Despesa(null, "Memória Ram", 630.0, cal17.getTime(), usuario1, tipoDespesa3);
+		Despesa despesa18 = new Despesa(null, "Cadeira gamer", 3800.0, cal21.getTime(), usuario1, tipoDespesa3);
+		Despesa despesa19 = new Despesa(null, "Shows", 500.0, cal12.getTime(), usuario1, tipoDespesa1);
+		Despesa despesa20 = new Despesa(null, "Bebidas", 1000.0, cal14.getTime(), usuario1, tipoDespesa1);
+		Despesa despesa21 = new Despesa(null, "Comidas", 250.0, cal16.getTime(), usuario1, tipoDespesa4);
+		Despesa despesa22 = new Despesa(null, "Presente", 1000.0, cal18.getTime(), usuario1, tipoDespesa6);
 
-		Despesa despesa8 = new Despesa(null, "Processador", 1340.50, cal2.getTime(), usuario2);
-		Despesa despesa9 = new Despesa(null, "Cinema", 50.50, cal4.getTime(), usuario2);
-		Despesa despesa10 = new Despesa(null, "Plano móvel", 60.0, cal6.getTime(), usuario2);
-		Despesa despesa11 = new Despesa(null, "Plano OI FIBRA", 100.0, cal7.getTime(), usuario2);
-		Despesa despesa12 = new Despesa(null, "Cadeira gamer", 800.0, cal8.getTime(), usuario2);
+		Despesa despesa8 = new Despesa(null, "Processador", 1340.50, cal2.getTime(), usuario2, tipoDespesa3);
+		Despesa despesa9 = new Despesa(null, "Cinema", 50.50, cal4.getTime(), usuario2, tipoDespesa1);
+		Despesa despesa10 = new Despesa(null, "Plano móvel", 60.0, cal6.getTime(), usuario2, tipoDespesa5);
+		Despesa despesa11 = new Despesa(null, "Plano OI FIBRA", 100.0, cal7.getTime(), usuario2, tipoDespesa5);
+		Despesa despesa12 = new Despesa(null, "Cadeira gamer", 800.0, cal8.getTime(), usuario2, tipoDespesa3);
+		Despesa despesa23 = new Despesa(null, "Far Cry 5", 200.0, cal8.getTime(), usuario2, tipoDespesa7);
 
 		despesaRepository.saveAll(Arrays.asList(despesa1, despesa2, despesa3, despesa4, despesa5, despesa6, despesa7,
 				despesa8, despesa9, despesa10, despesa11, despesa12, despesa13, despesa14, despesa16, despesa15,
-				despesa17, despesa18, despesa19, despesa20, despesa21, despesa22));
+				despesa17, despesa18, despesa19, despesa20, despesa21, despesa22, despesa23));
 
 		// RECEITA
 

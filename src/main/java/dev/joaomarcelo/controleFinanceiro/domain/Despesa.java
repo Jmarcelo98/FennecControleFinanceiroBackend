@@ -38,17 +38,23 @@ public class Despesa implements Serializable {
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
+	@ManyToOne
+	@JoinColumn(name = "tipo_despesa_id")
+	private TipoDespesa tipoDespesa;
+
 	public Despesa() {
 
 	}
 
-	public Despesa(Integer id, String nomeDespesa, Double valorDespesa, Date dataDespesa, Usuario usuario) {
+	public Despesa(Integer id, String nomeDespesa, Double valorDespesa, Date dataDespesa, Usuario usuario,
+			TipoDespesa tipoDespesa) {
 		super();
 		this.id = id;
 		this.nomeDespesa = nomeDespesa;
 		this.valorDespesa = valorDespesa;
 		this.dataDespesa = dataDespesa;
 		this.usuario = usuario;
+		this.tipoDespesa = tipoDespesa;
 	}
 
 	public Integer getId() {
@@ -89,6 +95,14 @@ public class Despesa implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public TipoDespesa getTipoDespesa() {
+		return tipoDespesa;
+	}
+
+	public void setTipoDespesa(TipoDespesa tipoDespesa) {
+		this.tipoDespesa = tipoDespesa;
 	}
 
 }

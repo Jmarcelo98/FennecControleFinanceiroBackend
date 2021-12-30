@@ -23,27 +23,23 @@ public interface DespesaRepository extends JpaRepository<Despesa, Integer> {
 	@Transactional(readOnly = true)
 	@Query(value = "SELECT obj.data_despesa FROM Despesa obj WHERE obj.usuario_id=?1 ORDER BY obj.data_despesa DESC LIMIT 1", nativeQuery = true)
 	Date buscarDataMaisRecenteDaDespesa(@Param("id") Integer id);
-	
+
 	@Transactional(readOnly = true)
 	@Query(value = "SELECT obj.data_despesa FROM Despesa obj WHERE obj.usuario_id=?1 ORDER BY obj.data_despesa ASC LIMIT 1", nativeQuery = true)
 	Date buscarDataMaisAntigaDaDespesa(@Param("id") Integer id);
 
 	@Transactional(readOnly = true)
-	@Query(value = "SELECT * FROM Despesa obj WHERE YEAR(obj.data_despesa)=?1 AND MONTH(obj.data_despesa)=?2 AND obj.usuario_id=?3 ORDER BY data_despesa desc ", nativeQuery = true)
-	List<Despesa> findDespesaByIdUsuarioPeloMesEAno(@Param("ano") Integer ano, @Param("mes") Integer mes, @Param("id") Integer id,
-			Pageable pageRequest);
-	
+	@Query(value = "SELECT * FROM Despesa obj WHERE YEAR(obj.data_despesa)=?1 AND MONTH(obj.data_despesa)=?2 AND obj.usuario_id=?3 ORDER BY obj.data_despesa DESC, obj.nome_despesa ASC ", nativeQuery = true)
+	List<Despesa> findDespesaByIdUsuarioPeloMesEAno(@Param("ano") Integer ano, @Param("mes") Integer mes,
+			@Param("id") Integer id, Pageable pageRequest);
+
 	@Transactional(readOnly = true)
 	@Query(value = "SELECT obj.valor_despesa FROM Despesa obj WHERE YEAR(obj.data_despesa)=?1 AND MONTH(obj.data_despesa)=?2 AND obj.usuario_id=?3 ORDER BY data_despesa desc ", nativeQuery = true)
 	List<Double> valoresDespesaDataAtual(@Param("ano") Integer ano, @Param("mes") Integer mes, @Param("id") Integer id);
-	
+
 	@Transactional(readOnly = true)
 	@Query(value = "SELECT * FROM Despesa obj WHERE obj.usuario_id = ? ORDER BY data_despesa desc", nativeQuery = true)
 	Optional<List<Despesa>> findByIdUsuario(@Param("id") Integer id);
-
-
-
-	
 
 	@Transactional(readOnly = true)
 	@Query(value = "SELECT DISTINCT YEAR(obj.DATA_DESPESA) FROM Despesa obj WHERE obj.usuario_id=?1 ORDER BY YEAR(obj.DATA_DESPESA) DESC", nativeQuery = true)

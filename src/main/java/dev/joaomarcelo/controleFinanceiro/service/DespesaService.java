@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import dev.joaomarcelo.controleFinanceiro.domain.Despesa;
+import dev.joaomarcelo.controleFinanceiro.domain.TipoDespesa;
 import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
 import dev.joaomarcelo.controleFinanceiro.dto.DespesaDTO;
 import dev.joaomarcelo.controleFinanceiro.dto.MesAnoDTO;
@@ -83,7 +84,8 @@ public class DespesaService {
 		Usuario usuario = usuarioService.buscarPeloId(id);
 
 		Despesa novaDespesa = new Despesa(null, despesa.getNomeDespesa(), despesa.getValorDespesa(),
-				despesa.getDataDespesa(), usuario);
+				despesa.getDataDespesa(), usuario, new TipoDespesa(despesa.getTipoDespesaDTO().getId(),
+						despesa.getTipoDespesaDTO().getDescricao(), usuario));
 
 		despesaRepository.saveAll(Arrays.asList(novaDespesa));
 	}
@@ -92,7 +94,8 @@ public class DespesaService {
 		Usuario usuario = usuarioService.buscarPeloId(idUsuario);
 
 		Despesa atualizarDespesa = new Despesa(despesa.getId(), despesa.getNomeDespesa(), despesa.getValorDespesa(),
-				despesa.getDataDespesa(), usuario);
+				despesa.getDataDespesa(), usuario, new TipoDespesa(despesa.getTipoDespesaDTO().getId(),
+						despesa.getTipoDespesaDTO().getDescricao(), usuario));
 
 		despesaRepository.save(atualizarDespesa);
 

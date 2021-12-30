@@ -45,8 +45,8 @@ public class PainelService {
 
 	public ResponseEntity<?> painelValores(Integer id, Integer ano) {
 
-		PainelDTO painel = new PainelDTO(buscarDespesasMesDeAcordoComAno(id, ano), buscarReceitasMesDeAcordoComAno(id, ano),
-				painelValoresReceitaDespesaSaldo(id, ano));
+		PainelDTO painel = new PainelDTO(buscarDespesasMesDeAcordoComAno(id, ano),
+				buscarReceitasMesDeAcordoComAno(id, ano), painelValoresReceitaDespesaSaldo(id, ano));
 
 		return ResponseEntity.ok(painel);
 
@@ -64,7 +64,7 @@ public class PainelService {
 
 			String data = st.nextToken(",");
 			String valor = st.nextToken(",");
-
+			
 			PainelDespesaDTO painel = new PainelDespesaDTO(Double.valueOf(valor), Integer.valueOf(data));
 			despesaDTOListaAnos.add(painel);
 		}

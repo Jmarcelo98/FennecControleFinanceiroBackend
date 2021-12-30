@@ -16,6 +16,8 @@ public class DespesaDTO implements Serializable {
 
 	private Date dataDespesa;
 
+	private TipoDespesaDTO tipoDespesaDTO;
+
 	public DespesaDTO() {
 	}
 
@@ -24,6 +26,7 @@ public class DespesaDTO implements Serializable {
 		nomeDespesa = despesa.getNomeDespesa();
 		valorDespesa = despesa.getValorDespesa();
 		dataDespesa = despesa.getDataDespesa();
+		tipoDespesaDTO = new TipoDespesaDTO(despesa.getTipoDespesa().getId(), despesa.getTipoDespesa().getDescricao());
 	}
 
 	public Integer getId() {
@@ -56,6 +59,14 @@ public class DespesaDTO implements Serializable {
 
 	public void setDataDespesa(Date dataDespesa) {
 		this.dataDespesa = dataDespesa;
+	}
+
+	public TipoDespesaDTO getTipoDespesaDTO() {
+		return tipoDespesaDTO;
+	}
+
+	public void setTipoDespesaDTO(TipoDespesaDTO tipoDespesaDTO) {
+		this.tipoDespesaDTO = tipoDespesaDTO;
 	}
 
 }
