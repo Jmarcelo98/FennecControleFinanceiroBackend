@@ -2,6 +2,7 @@ package dev.joaomarcelo.controleFinanceiro.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,5 +15,8 @@ public interface TipoReceitaRepository extends JpaRepository<TipoReceita, Intege
 
 	@Query(value = "SELECT * FROM Tipo_Receita obj WHERE obj.usuario_id=?1 order by obj.descricao ASC", nativeQuery = true)
 	List<TipoReceita> findByUsuario(@Param("ano") Integer ano);
+
+	@Query(value = "SELECT * FROM Tipo_Receita obj WHERE obj.usuario_id=?1 ORDER BY obj.descricao ASC", nativeQuery = true)
+	List<TipoReceita> findTipoReceitaPaginacao(@Param("id") Integer id, Pageable pageRequest);
 
 }

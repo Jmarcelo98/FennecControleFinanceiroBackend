@@ -23,6 +23,9 @@ public class MensagensPersonalizadas {
 	public static String ENVIADO_CODIGO_RECUPERAR_SENHA = "Código para criar nova senha enviado com sucesso!";
 	public static String CODIGO_INVALIDO = "Código inválido!";
 	public static String SENHA_ALTERADA = "Senha alterada com sucesso!";
+	
+//	TIPO RECEITA
+	public static String SEM_TIPO_RECEITA_CADASTRADA = "Você não possui categorias de receitas cadastradas no sistema";
 
 	// ERROR
 	public static String ERROR_DESCONHECIDO = "Error desconhecido, tente novamente mais tarde!";
