@@ -1,4 +1,4 @@
-package dev.joaomarcelo.controleFinanceiro.domain;
+package dev.joaomarcelo.controleFinanceiro.model.domain;
 
 import java.io.Serializable;
 import java.util.Date;

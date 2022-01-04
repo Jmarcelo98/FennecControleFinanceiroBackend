@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Usuario;
 import dev.joaomarcelo.controleFinanceiro.payload.request.LoginRequest;
 import dev.joaomarcelo.controleFinanceiro.payload.request.RegistrarRequest;
 import dev.joaomarcelo.controleFinanceiro.payload.response.JwtResponse;

@@ -1,4 +1,4 @@
-package dev.joaomarcelo.controleFinanceiro.dto;
+package dev.joaomarcelo.controleFinanceiro.model.dto;
 
 public class PainelDespesaDTO {
 

@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {

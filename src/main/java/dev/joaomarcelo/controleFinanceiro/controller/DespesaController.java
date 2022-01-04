@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.joaomarcelo.controleFinanceiro.domain.Despesa;
-import dev.joaomarcelo.controleFinanceiro.dto.ControleDeDatasDTO;
-import dev.joaomarcelo.controleFinanceiro.dto.DespesaDTO;
-import dev.joaomarcelo.controleFinanceiro.dto.QuantidadeEDespesasMensais;
-import dev.joaomarcelo.controleFinanceiro.dto.QuantidadeMensal;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Despesa;
+import dev.joaomarcelo.controleFinanceiro.model.dto.ControleDeDatasDTO;
+import dev.joaomarcelo.controleFinanceiro.model.dto.DespesaDTO;
+import dev.joaomarcelo.controleFinanceiro.model.dto.QuantidadeEDespesasMensais;
+import dev.joaomarcelo.controleFinanceiro.model.dto.QuantidadeMensal;
 import dev.joaomarcelo.controleFinanceiro.security.jwt.JwtUtils;
 import dev.joaomarcelo.controleFinanceiro.service.DespesaService;
 

@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import dev.joaomarcelo.controleFinanceiro.dto.PainelDTO;
-import dev.joaomarcelo.controleFinanceiro.dto.PainelDespesaDTO;
-import dev.joaomarcelo.controleFinanceiro.dto.PainelReceitaDTO;
-import dev.joaomarcelo.controleFinanceiro.dto.PainelValoresAnuaisESaldo;
+import dev.joaomarcelo.controleFinanceiro.model.dto.PainelDTO;
+import dev.joaomarcelo.controleFinanceiro.model.dto.PainelDespesaDTO;
+import dev.joaomarcelo.controleFinanceiro.model.dto.PainelReceitaDTO;
+import dev.joaomarcelo.controleFinanceiro.model.dto.PainelValoresAnuaisESaldo;
 import dev.joaomarcelo.controleFinanceiro.repository.DespesaRepository;
 import dev.joaomarcelo.controleFinanceiro.repository.ReceitaRepository;
 

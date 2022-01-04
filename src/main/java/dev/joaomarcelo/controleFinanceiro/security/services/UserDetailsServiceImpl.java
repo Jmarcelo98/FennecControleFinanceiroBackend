@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Usuario;
 import dev.joaomarcelo.controleFinanceiro.repository.UsuarioRepository;
 
 @Service

@@ -11,11 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import dev.joaomarcelo.controleFinanceiro.domain.Despesa;
-import dev.joaomarcelo.controleFinanceiro.domain.TipoDespesa;
-import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
-import dev.joaomarcelo.controleFinanceiro.dto.DespesaDTO;
-import dev.joaomarcelo.controleFinanceiro.dto.MesAnoDTO;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Despesa;
+import dev.joaomarcelo.controleFinanceiro.model.domain.TipoDespesa;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Usuario;
+import dev.joaomarcelo.controleFinanceiro.model.dto.DespesaDTO;
+import dev.joaomarcelo.controleFinanceiro.model.dto.MesAnoDTO;
 import dev.joaomarcelo.controleFinanceiro.repository.DespesaRepository;
 import dev.joaomarcelo.controleFinanceiro.service.exception.ObjetoNaoEncontrado;
 import dev.joaomarcelo.controleFinanceiro.util.Datas;

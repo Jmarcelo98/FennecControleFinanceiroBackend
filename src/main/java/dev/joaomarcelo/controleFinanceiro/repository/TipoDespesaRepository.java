@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import dev.joaomarcelo.controleFinanceiro.domain.TipoDespesa;
+import dev.joaomarcelo.controleFinanceiro.model.domain.TipoDespesa;
 
 @Repository
 public interface TipoDespesaRepository extends JpaRepository<TipoDespesa, Integer> {

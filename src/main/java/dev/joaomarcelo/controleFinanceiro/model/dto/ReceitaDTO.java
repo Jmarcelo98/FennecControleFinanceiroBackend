@@ -1,9 +1,9 @@
-package dev.joaomarcelo.controleFinanceiro.dto;
+package dev.joaomarcelo.controleFinanceiro.model.dto;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import dev.joaomarcelo.controleFinanceiro.domain.Receita;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Receita;
 
 public class ReceitaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;

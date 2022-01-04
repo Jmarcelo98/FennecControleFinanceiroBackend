@@ -23,11 +23,13 @@ public class MensagensPersonalizadas {
 	public static String ENVIADO_CODIGO_RECUPERAR_SENHA = "Código para criar nova senha enviado com sucesso!";
 	public static String CODIGO_INVALIDO = "Código inválido!";
 	public static String SENHA_ALTERADA = "Senha alterada com sucesso!";
-	
+
 //	TIPO RECEITA
 	public static String SEM_TIPO_RECEITA_CADASTRADA = "Você não possui categorias de receitas cadastradas no sistema";
+	public static String TIPO_RECEITA_DELETADA = "Categoria de receita deletada com sucesso!";
 
 	// ERROR
 	public static String ERROR_DESCONHECIDO = "Error desconhecido, tente novamente mais tarde!";
+	public static String IMPOSSIVEL_DELETAR_TIPO_RECEITA = "Categoria não pode ser deletada por estar vinculada a uma receita";
 
 }

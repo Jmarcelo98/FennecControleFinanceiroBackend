@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import dev.joaomarcelo.controleFinanceiro.domain.Receita;
-import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Receita;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Usuario;
 import dev.joaomarcelo.controleFinanceiro.repository.UsuarioRepository;
 import dev.joaomarcelo.controleFinanceiro.service.exception.ObjetoNaoEncontrado;
 import dev.joaomarcelo.controleFinanceiro.util.FormatarPalavras;

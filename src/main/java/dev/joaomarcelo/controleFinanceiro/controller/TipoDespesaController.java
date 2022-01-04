@@ -1,4 +1,4 @@
-package dev.joaomarcelo.controleFinanceiro.controller.exception;
+package dev.joaomarcelo.controleFinanceiro.controller;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.joaomarcelo.controleFinanceiro.dto.TipoDespesaDTO;
+import dev.joaomarcelo.controleFinanceiro.model.dto.TipoDespesaDTO;
 import dev.joaomarcelo.controleFinanceiro.security.jwt.JwtUtils;
 import dev.joaomarcelo.controleFinanceiro.service.TipoDespesaService;
 

@@ -1,4 +1,4 @@
-package dev.joaomarcelo.controleFinanceiro.domain;
+package dev.joaomarcelo.controleFinanceiro.model.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class TipoDespesa {
+public class TipoReceita {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,16 +32,18 @@ public class TipoDespesa {
 	private Usuario usuario;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "tipoDespesa", cascade = CascadeType.ALL)
-	private List<Despesa> despesa = new ArrayList<>();
+	@OneToMany(mappedBy = "tipoReceita", cascade = CascadeType.DETACH)
+	private List<Receita> receita = new ArrayList<>();
+//	private Receita receita;
 
-	public TipoDespesa(Integer id, String descricao, Usuario usuario) {
+	public TipoReceita(Integer id, String descricao, Usuario usuario) {
+		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.usuario = usuario;
 	}
 
-	public TipoDespesa() {
+	public TipoReceita() {
 
 	}
 
@@ -57,7 +59,7 @@ public class TipoDespesa {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
+	public void setDescrição(String descricao) {
 		this.descricao = descricao;
 	}
 
@@ -69,12 +71,12 @@ public class TipoDespesa {
 		this.usuario = usuario;
 	}
 
-	public List<Despesa> getDespesa() {
-		return despesa;
+	public List<Receita> getReceita() {
+		return receita;
 	}
 
-	public void setDespesa(List<Despesa> despesa) {
-		this.despesa = despesa;
+	public void setReceita(List<Receita> receita) {
+		this.receita = receita;
 	}
 
 }

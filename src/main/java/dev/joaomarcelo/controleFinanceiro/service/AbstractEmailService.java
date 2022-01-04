@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 
-import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Usuario;
 
 public abstract class AbstractEmailService implements EmailService {
 

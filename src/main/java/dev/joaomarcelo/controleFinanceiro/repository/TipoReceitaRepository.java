@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import dev.joaomarcelo.controleFinanceiro.domain.TipoReceita;
+import dev.joaomarcelo.controleFinanceiro.model.domain.TipoReceita;
 
 @Repository
 public interface TipoReceitaRepository extends JpaRepository<TipoReceita, Integer> {
@@ -18,5 +18,8 @@ public interface TipoReceitaRepository extends JpaRepository<TipoReceita, Intege
 
 	@Query(value = "SELECT * FROM Tipo_Receita obj WHERE obj.usuario_id=?1 ORDER BY obj.descricao ASC", nativeQuery = true)
 	List<TipoReceita> findTipoReceitaPaginacao(@Param("id") Integer id, Pageable pageRequest);
+
+	@Query(value = "SELECT COUNT(*) FROM Tipo_Receita obj WHERE obj.usuario_id=?1", nativeQuery = true)
+	Integer contador(@Param("id") Integer id);
 
 }

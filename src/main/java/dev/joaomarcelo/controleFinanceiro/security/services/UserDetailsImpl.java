@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Usuario;
 
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;

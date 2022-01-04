@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import dev.joaomarcelo.controleFinanceiro.domain.TipoDespesa;
-import dev.joaomarcelo.controleFinanceiro.dto.TipoDespesaDTO;
+import dev.joaomarcelo.controleFinanceiro.model.domain.TipoDespesa;
+import dev.joaomarcelo.controleFinanceiro.model.dto.TipoDespesaDTO;
 import dev.joaomarcelo.controleFinanceiro.repository.TipoDespesaRepository;
 
 @Service

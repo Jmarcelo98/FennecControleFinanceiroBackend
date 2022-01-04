@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import dev.joaomarcelo.controleFinanceiro.domain.Despesa;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Despesa;
 
 @Repository
 public interface DespesaRepository extends JpaRepository<Despesa, Integer> {

@@ -9,11 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import dev.joaomarcelo.controleFinanceiro.domain.Receita;
-import dev.joaomarcelo.controleFinanceiro.domain.TipoReceita;
-import dev.joaomarcelo.controleFinanceiro.domain.Usuario;
-import dev.joaomarcelo.controleFinanceiro.dto.MesAnoDTO;
-import dev.joaomarcelo.controleFinanceiro.dto.ReceitaDTO;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Receita;
+import dev.joaomarcelo.controleFinanceiro.model.domain.TipoReceita;
+import dev.joaomarcelo.controleFinanceiro.model.domain.Usuario;
+import dev.joaomarcelo.controleFinanceiro.model.dto.MesAnoDTO;
+import dev.joaomarcelo.controleFinanceiro.model.dto.ReceitaDTO;
 import dev.joaomarcelo.controleFinanceiro.repository.ReceitaRepository;
 import dev.joaomarcelo.controleFinanceiro.service.exception.ObjetoNaoEncontrado;
 import dev.joaomarcelo.controleFinanceiro.util.Datas;

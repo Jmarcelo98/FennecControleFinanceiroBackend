@@ -1,18 +1,20 @@
-package dev.joaomarcelo.controleFinanceiro.dto;
+package dev.joaomarcelo.controleFinanceiro.model.dto;
 
-import dev.joaomarcelo.controleFinanceiro.domain.TipoDespesa;
+import dev.joaomarcelo.controleFinanceiro.model.domain.TipoReceita;
 
-public class TipoDespesaDTO {
+public class TipoReceitaDTO {
 
 	private Integer id;
+
 	private String descricao;
 
-	public TipoDespesaDTO(Integer id, String descricao) {
+	public TipoReceitaDTO(Integer id, String descricao) {
+		super();
 		this.id = id;
 		this.descricao = descricao;
 	}
 
-	public TipoDespesaDTO(TipoDespesa obj) {
+	public TipoReceitaDTO(TipoReceita obj) {
 		id = obj.getId();
 		descricao = obj.getDescricao();
 	}
