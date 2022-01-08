@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,9 @@ public class TipoReceitaService {
 
 	@Autowired
 	private TipoReceitaRepository tipoReceitaRepository;
+
+	@Autowired
+	private UsuarioService usuarioService;
 
 	public ResponseEntity<List<TipoReceitaDTO>> buscarTodosTiposReceitaPorIdUsuario(Integer id) {
 		List<TipoReceita> tipoReceita = tipoReceitaRepository.findByUsuario(id);
@@ -58,10 +62,23 @@ public class TipoReceitaService {
 
 		try {
 			tipoReceitaRepository.deleteById(id);
-//			return MensagensPersonalizadas.TIPO_RECEITA_DELETADA;
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegridadeExcecao(MensagensPersonalizadas.IMPOSSIVEL_DELETAR_TIPO_RECEITA);
 		}
 
 	}
+
+	public ResponseEntity<String> atualizarTipoDeReceita(TipoReceitaDTO tipoReceitaDTO, Integer id) {
+
+		if (tipoReceitaRepository.existsByDescricaoAndUsuarioId(tipoReceitaDTO.getDescricao(), id)) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(MensagensPersonalizadas.IMPOSSIVEL_ATUALIZAR_TIPO_RECEITA);
+		} else {
+			tipoReceitaRepository.save(new TipoReceita(tipoReceitaDTO.getId(), tipoReceitaDTO.getDescricao(),
+					usuarioService.buscarPeloId(id)));
+			return ResponseEntity.noContent().build();
+		}
+
+	}
+
 }

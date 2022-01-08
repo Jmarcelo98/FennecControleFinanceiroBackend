@@ -32,7 +32,7 @@ public class TipoDespesa {
 	private Usuario usuario;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "tipoDespesa", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "tipoDespesa", cascade = CascadeType.DETACH)
 	private List<Despesa> despesa = new ArrayList<>();
 
 	public TipoDespesa(Integer id, String descricao, Usuario usuario) {

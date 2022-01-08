@@ -34,7 +34,6 @@ public class TipoReceita {
 	@JsonIgnore
 	@OneToMany(mappedBy = "tipoReceita", cascade = CascadeType.DETACH)
 	private List<Receita> receita = new ArrayList<>();
-//	private Receita receita;
 
 	public TipoReceita(Integer id, String descricao, Usuario usuario) {
 		super();

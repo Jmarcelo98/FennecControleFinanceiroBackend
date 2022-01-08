@@ -22,4 +22,10 @@ public interface TipoReceitaRepository extends JpaRepository<TipoReceita, Intege
 	@Query(value = "SELECT COUNT(*) FROM Tipo_Receita obj WHERE obj.usuario_id=?1", nativeQuery = true)
 	Integer contador(@Param("id") Integer id);
 
+	Boolean existsByDescricao(String descricao);
+
+	@Query(value = "SELECT DISTINCT CASE WHEN EXISTS (SELECT * FROM TIPO_RECEITA where DESCRICAO"
+			+ " = ?1 and usuario_id = ?2) then 'TRUE' else 'FALSE' END FROM tipo_receita", nativeQuery = true)
+	Boolean existsByDescricaoAndUsuarioId(@Param("descricao") String descricao, @Param("id") Integer id);
+
 }
